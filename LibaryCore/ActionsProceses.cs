@@ -9,17 +9,22 @@ namespace SupervisorConsole
 {
     public class ActionsProceses
     {
-        public event EventHandler<ProcessEventArgs> GetDetails;
-        protected virtual void OnProcessEventArgs(ProcessEventArgs e, EventHandler<ProcessEventArgs> occasion)
+        private ShortProcess CreateShortProcess (Process process)
         {
-            EventHandler<ProcessEventArgs> raiseEvent = occasion;
-            raiseEvent?.Invoke(this, e);
-        }
-
-        private ProcessEventArgs CreateEventArgs(Process proc)
-        {
-            ProcessEventArgs args = new ProcessEventArgs(proc);
-            return args;
+            ShortProcess sProc = new ShortProcess();
+            sProc.Name = process.ProcessName;
+            sProc.Id = process.Id;
+            sProc.Memory = process.PeakWorkingSet64;
+            try
+            {
+                sProc.Location = process.MainModule.FileName;
+            }
+            catch (Exception)
+            {
+                sProc.Location = "n/a";
+            }
+            
+            return sProc;
         }
 
         public void Start(string link)
@@ -41,29 +46,29 @@ namespace SupervisorConsole
             killed.Kill(true);
         }
 
-        public void Details (int idProceses)
+        public ShortProcess Details (int idProceses)
         {
             Process[] Proc = Process.GetProcesses();
             Process show = Proc.First(x => x.Id == idProceses);
 
-            OnProcessEventArgs(CreateEventArgs(show), GetDetails);
+            return CreateShortProcess(show);
         }
 
-        public void Details(string nameProceses)
+        public ShortProcess Details(string nameProceses)
         {
             Process[] Proc = Process.GetProcesses();
             Process show = Proc.First(x => x.ProcessName == nameProceses);
 
-            OnProcessEventArgs(CreateEventArgs(show), GetDetails);
+            return CreateShortProcess(show);
         }
 
         public List<ShortProcess> List()
         {
             List<ShortProcess> list = new List<ShortProcess>();
-            Process[] processes = Process.GetProcesses();
-            foreach (var i in processes)
+
+            foreach (var i in Process.GetProcesses())
             {
-                ShortProcess temporary = new ShortProcess(i);
+                ShortProcess temporary = CreateShortProcess(i);
                 list.Add(temporary);
             }
             return list;

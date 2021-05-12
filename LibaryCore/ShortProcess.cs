@@ -12,12 +12,5 @@ namespace LibaryCore
         public int Id { get; set; }
         public long Memory { get; set; }
         public string Location { get; set; }
-        public ShortProcess(Process process)
-        {
-            Name = process.ProcessName;
-            Id = process.Id;
-            Memory = process.PeakWorkingSet64;
-            Location = process.MainModule.FileName;
-        }
     }
 }

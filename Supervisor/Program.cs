@@ -4,8 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using ConsoleTables;
 using LibaryCore;
-using System.Collections.Generic;
-using System.Diagnostics;
+
 
 namespace SupervisorConsole
 {
@@ -19,14 +18,14 @@ namespace SupervisorConsole
             await Host.CreateDefaultBuilder().RunConsoleAppFrameworkAsync<Program>(args);
         }
 
-        [Command("start")]
+        [Command("Start")]
 
         public void Start([Option(0)] string link)
         {
             actions.Start(link);
         }
 
-        [Command("kill by id")]
+        [Command("KillById")]
 
         public void Kill([Option(0)] int id)
         {
@@ -34,7 +33,7 @@ namespace SupervisorConsole
             actions.Kill(id);
         }
 
-        [Command("kill by name")]
+        [Command("KillByName")]
 
         public void Kill([Option(0)] string name)
         {
@@ -43,48 +42,34 @@ namespace SupervisorConsole
         }
 
 
-        [Command("details by id")]
+        [Command("DetailsById")]
 
         public void Details([Option(0)] int id)
         {
-            actions.GetDetails += delegate (object sender, ProcessEventArgs e)
-            {
-                Console.WriteLine($"Name - {e.proc.Name}, Id - {e.proc.Id}, memory usage - {e.proc.Memory}, location - {e.proc.Location}");
-            };
-            actions.Details(id);
+            ShortProcess proc = actions.Details(id);
+            var table = new ConsoleTable("Name", "Id", "Memory Usage", "Location");
+            table.AddRow(proc.Name, proc.Id, proc.Memory, proc.Location);
+            table.Write();
         }
 
-        [Command("details by name")]
+        [Command("DetailsByName")]
         public void Details([Option(0)] string name)
         {
-            actions.GetDetails += delegate (object sender, ProcessEventArgs e)
-            {
-                Console.WriteLine($"Name - {e.proc.Name}, Id - {e.proc.Id}, memory usage - {e.proc.Memory}, location - {e.proc.Location}");
-            };
-            actions.Details(name);
+            ShortProcess proc = actions.Details(name);
+            var table = new ConsoleTable("Name", "Id", "Memory Usage", "Location");
+            table.AddRow(proc.Name, proc.Id, proc.Memory, proc.Location);
+            table.Write();
         }
 
-        [Command("list")]
+        [Command("List")]
         public void List()
         {
-            List<ShortProcess> list = actions.List();
-            foreach (var i in list)
+            var table = new ConsoleTable("Name", "Id");
+            foreach (var i in actions.List())
             {
-                Console.WriteLine($"Name - {i.Name}, Id - {i.Id}");
+                table.AddRow(i.Name, i.Id);
             }
-
-            /*Process[] a = Process.GetProcesses();
-            List<Process> b = new List<Process>();
-
-            foreach (var i in a)
-            {
-                b.Add(i);
-            }
-
-            foreach (var i in b)
-            {
-                Console.WriteLine(i.ProcessName);
-            }*/
+            table.Write();
         }
     }
 }
