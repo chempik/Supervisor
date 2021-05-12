@@ -1,3 +1,8 @@
 bin 
 obj
 TestResults
+Supervisor/obj/project.nuget.cache
+Supervisor/obj/project.assets.json
+Supervisor/obj/Supervisor.csproj.nuget.dgspec.json 
+Supervisor/SupervisorConsole.csproj
+LibaryCore/LibaryCore.csproj

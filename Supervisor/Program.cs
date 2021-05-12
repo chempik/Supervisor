@@ -22,14 +22,20 @@ namespace SupervisorConsole
 
         public void Start([Option(0)] string link)
         {
-            actions.Start(link);
+            ShortProcess added = actions.Start(link);
+            if (added != null)
+            {
+                var table = new ConsoleTable("Name", "Id", "Memory Usage", "Location");
+                table.AddRow(added.Name, added.Id, added.Memory, added.Location);
+                table.Write();
+            }
+            else Console.WriteLine("exe not found");
         }
 
         [Command("KillById")]
 
         public void Kill([Option(0)] int id)
         {
-
             actions.Kill(id);
         }
 

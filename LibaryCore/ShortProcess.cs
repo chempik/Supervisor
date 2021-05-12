@@ -8,9 +8,9 @@ namespace LibaryCore
 {
     public class ShortProcess
     {
-        public string Name { get; set; }
-        public int Id { get; set; }
-        public long Memory { get; set; }
-        public string Location { get; set; }
+        public string Name { get; internal set; }
+        public int Id { get; internal set; }
+        public long Memory { get; internal set; }
+        public string Location { get; internal set; }
     }
 }

@@ -27,9 +27,17 @@ namespace SupervisorConsole
             return sProc;
         }
 
-        public void Start(string link)
+        public ShortProcess Start(string link)
         {
-            Process.Start(link);
+            try
+            {
+                Process added = Process.Start(link);
+                return CreateShortProcess(added);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public void Kill(string nameProceses)
