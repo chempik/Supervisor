@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w6txOIs0n5kKKeQnKUevB2eWVj1DUfPBdl1QzjpcAvRUUFZzEjJ2Z++NkoStnIB2GQ1Bj3I1rZneqb1hi2AoVw==",
+  "dgSpecHash": "Gv+RQGPvfpgrVB2IpGIJ1JnB5JXCW5SX8d6PgRY7rtQqsy3r5Cp61ybHD+kkNn9wrLk51lv/fVC3HCtZT74dcg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rsemeniak\\source\\repos\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+  "projectFilePath": "C:\\Users\\rsemeniak\\source\\repos\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rsemeniak\\.nuget\\packages\\consoleappframework\\3.3.0\\consoleappframework.3.3.0.nupkg.sha512",
     "C:\\Users\\rsemeniak\\.nuget\\packages\\consoletables\\2.4.2\\consoletables.2.4.2.nupkg.sha512",

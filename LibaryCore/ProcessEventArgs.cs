@@ -5,6 +5,11 @@ namespace LibaryCore
 {
     public class ProcessEventArgs : EventArgs
     {
-        public Process proc { get; set; }
+        public ShortProcess proc { get; set; }
+
+        public ProcessEventArgs(Process process)
+        {
+            proc = new ShortProcess(process);
+        }
     }
 }

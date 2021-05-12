@@ -3,8 +3,9 @@ using ConsoleAppFramework;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using ConsoleTables;
-using System.Diagnostics;
 using LibaryCore;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SupervisorConsole
 {
@@ -19,56 +20,71 @@ namespace SupervisorConsole
         }
 
         [Command("start")]
-        
-        public void Start(string link)
+
+        public void Start([Option(0)] string link)
         {
             actions.Start(link);
         }
 
-        [Command ("kill")]
+        [Command("kill by id")]
 
-        public void Kill(int id)
+        public void Kill([Option(0)] int id)
         {
+
             actions.Kill(id);
         }
 
-        [Command("kill")]
+        [Command("kill by name")]
 
-        public void Kill(string name)
+        public void Kill([Option(0)] string name)
         {
+
             actions.Kill(name);
         }
 
-        [Command ("details")]
 
-        public void Details(int id)
+        [Command("details by id")]
+
+        public void Details([Option(0)] int id)
         {
             actions.GetDetails += delegate (object sender, ProcessEventArgs e)
             {
-                Console.WriteLine($"Name - {e.proc.ProcessName}, Id - {e.proc.Id}, memory usage - {e.proc.PeakWorkingSet64}, location - adapted in the future");
+                Console.WriteLine($"Name - {e.proc.Name}, Id - {e.proc.Id}, memory usage - {e.proc.Memory}, location - {e.proc.Location}");
             };
             actions.Details(id);
         }
 
-        [Command("details")]
-        public void Details(string name)
+        [Command("details by name")]
+        public void Details([Option(0)] string name)
         {
             actions.GetDetails += delegate (object sender, ProcessEventArgs e)
             {
-                Console.WriteLine($"Name - {e.proc.ProcessName}, Id - {e.proc.Id}, memory usage - {e.proc.PeakWorkingSet64}, location - adapted in the future");
+                Console.WriteLine($"Name - {e.proc.Name}, Id - {e.proc.Id}, memory usage - {e.proc.Memory}, location - {e.proc.Location}");
             };
             actions.Details(name);
         }
 
         [Command("list")]
-
         public void List()
         {
-            Process[] array = Process.GetProcesses();
-            foreach (var i in array)
+            List<ShortProcess> list = actions.List();
+            foreach (var i in list)
             {
-                Console.WriteLine($"Name - {i.ProcessName}, Id - {i.Id}");
+                Console.WriteLine($"Name - {i.Name}, Id - {i.Id}");
             }
+
+            /*Process[] a = Process.GetProcesses();
+            List<Process> b = new List<Process>();
+
+            foreach (var i in a)
+            {
+                b.Add(i);
+            }
+
+            foreach (var i in b)
+            {
+                Console.WriteLine(i.ProcessName);
+            }*/
         }
     }
 }
