@@ -18,8 +18,12 @@ namespace SupervisorConsole
             await Host.CreateDefaultBuilder().RunConsoleAppFrameworkAsync<Program>(args);
         }
 
+        /// <summary>
+        /// starts process by exe file
+        /// </summary>
+        /// <param name="link">link to exe file</param>
         [Command("Start")]
-
+        
         public void Start([Option(0)] string link)
         {
             ShortProcess added = actions.Start(link);
@@ -31,7 +35,10 @@ namespace SupervisorConsole
             }
             else Console.WriteLine("exe not found");
         }
-
+        /// <summary>
+        /// kill proceses by Id
+        /// </summary>
+        /// <param name="id">Id procrses which is required killed</param>
         [Command("KillById")]
 
         public void Kill([Option(0)] int id)
@@ -40,7 +47,10 @@ namespace SupervisorConsole
             if (inspector) Console.WriteLine("Process has been removed");
             else Console.WriteLine("Process not found");
         }
-
+        /// <summary>
+        /// kill proceses by Name
+        /// </summary>
+        /// <param name="name">name procrses which is required killed</param>
         [Command("KillByName")]
 
         public void Kill([Option(0)] string name)
@@ -50,7 +60,10 @@ namespace SupervisorConsole
             else Console.WriteLine("Process not found");
         }
 
-
+        /// <summary>
+        /// shows more detailed information about a particular process
+        /// </summary>
+        /// <param name="id">id of the process to be shown</param>
         [Command("DetailsById")]
 
         public void Details([Option(0)] int id)
@@ -64,7 +77,10 @@ namespace SupervisorConsole
             }
             else Console.WriteLine("Process not found");
         }
-
+        /// <summary>
+        /// shows more detailed information about a particular process
+        /// </summary>
+        /// <param name="name">name of the process to be shown</param>
         [Command("DetailsByName")]
         public void Details([Option(0)] string name)
         {
@@ -78,6 +94,9 @@ namespace SupervisorConsole
             else Console.WriteLine("Process not found");
         }
 
+        /// <summary>
+        /// displays a list of all processes
+        /// </summary>
         [Command("List")]
         public void List()
         {

@@ -36,7 +36,11 @@ namespace SupervisorConsole
             }
             return sProc;
         }
-
+        /// <summary>
+        /// starts process by exe file
+        /// </summary>
+        /// <param name="link">link to exe file</param>
+        /// <returns>returns this process</returns>
         public ShortProcess Start(string link)
         {
             try
@@ -57,7 +61,11 @@ namespace SupervisorConsole
                 throw new ExeNotFoundException();
             }
         }
-
+        /// <summary>
+        /// kill proceses by name
+        /// </summary>
+        /// <param name="nameProceses">name procrses which is required killed</param>
+        /// <returns>return true if proceses has benn killed</returns>
         public bool Kill(string nameProceses)
         {
             Process[] Proc = Process.GetProcesses();
@@ -85,6 +93,11 @@ namespace SupervisorConsole
             }
         }
 
+        /// <summary>
+        /// kill proceses by Id
+        /// </summary>
+        /// <param name="idProceses">Id procrses which is required killed</param>
+        /// <returns>return true if proceses has benn killed</returns>
         public bool Kill(int idProceses)
         {
             Process[] Proc = Process.GetProcesses();
@@ -111,20 +124,32 @@ namespace SupervisorConsole
                 throw new NameNotFoundException();
             }
         }
-
+        /// <summary>
+        /// shows more detailed information about a particular process
+        /// </summary>
+        /// <param name="idProceses">id of the process to be shown</param>
+        /// <returns>proceses</returns>
         public ShortProcess Details(int idProceses)
         {
             Process[] Proc = Process.GetProcesses();
             Process show = Proc.First(x => x.Id == idProceses);
             return CreateShortProcess(show);
         }
+        /// <summary>
+        /// shows more detailed information about a particular process
+        /// </summary>
+        /// <param name="nameProceses">Name of the process to be shown</param>
+        /// <returns>proceses</returns>
         public ShortProcess Details(string nameProceses)
         {
             Process[] Proc = Process.GetProcesses();
             Process show = Proc.First(x => x.ProcessName == nameProceses);
             return CreateShortProcess(show);
         }
-
+        /// <summary>
+        /// displays a list of all processes
+        /// </summary>
+        /// <returns>returned list with proceses</returns>
         public List<ShortProcess> List()
         {
             List<ShortProcess> list = new List<ShortProcess>();
