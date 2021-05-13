@@ -36,15 +36,18 @@ namespace SupervisorConsole
 
         public void Kill([Option(0)] int id)
         {
-            actions.Kill(id);
+           bool inspector = actions.Kill(id);
+            if (inspector) Console.WriteLine("Process has been removed");
+            else Console.WriteLine("Process not found");
         }
 
         [Command("KillByName")]
 
         public void Kill([Option(0)] string name)
         {
-
-            actions.Kill(name);
+            bool inspector = actions.Kill(name);
+            if (inspector) Console.WriteLine("Process has been removed");
+            else Console.WriteLine("Process not found");
         }
 
 
@@ -53,18 +56,26 @@ namespace SupervisorConsole
         public void Details([Option(0)] int id)
         {
             ShortProcess proc = actions.Details(id);
-            var table = new ConsoleTable("Name", "Id", "Memory Usage", "Location");
-            table.AddRow(proc.Name, proc.Id, proc.Memory, proc.Location);
-            table.Write();
+            if (proc != null)
+            {
+                var table = new ConsoleTable("Name", "Id", "Memory Usage", "Location");
+                table.AddRow(proc.Name, proc.Id, proc.Memory, proc.Location);
+                table.Write();
+            }
+            else Console.WriteLine("Process not found");
         }
 
         [Command("DetailsByName")]
         public void Details([Option(0)] string name)
         {
             ShortProcess proc = actions.Details(name);
-            var table = new ConsoleTable("Name", "Id", "Memory Usage", "Location");
-            table.AddRow(proc.Name, proc.Id, proc.Memory, proc.Location);
-            table.Write();
+            if (proc != null)
+            {
+                var table = new ConsoleTable("Name", "Id", "Memory Usage", "Location");
+                table.AddRow(proc.Name, proc.Id, proc.Memory, proc.Location);
+                table.Write();
+            }
+            else Console.WriteLine("Process not found");
         }
 
         [Command("List")]
