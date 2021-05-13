@@ -10,6 +10,9 @@ using System.IO;
 
 namespace SupervisorConsole
 {
+    /// <summary>
+    /// a class that provides access to work with processes
+    /// </summary>
     public class ActionsProceses
     {
         private ShortProcess CreateShortProcess(Process process)

@@ -6,6 +6,9 @@ using System.Diagnostics;
 
 namespace LibaryCore
 {
+    /// <summary>
+    /// wrapper which reduces the class process to the size we need
+    /// </summary>
     public class ShortProcess
     {
         public string Name { get; internal set; }

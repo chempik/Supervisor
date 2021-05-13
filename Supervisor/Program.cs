@@ -8,7 +8,7 @@ using LibaryCore;
 
 namespace SupervisorConsole
 {
-    class Program : ConsoleAppBase
+    internal class Program : ConsoleAppBase
     {
         private ActionsProceses actions = new ActionsProceses();
 
