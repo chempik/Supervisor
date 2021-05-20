@@ -8,7 +8,7 @@ using ExceptionsLibrary;
 using System.ComponentModel;
 using System.IO;
 
-namespace SupervisorConsole
+namespace LibaryCore
 {
     /// <summary>
     /// a class that provides access to work with processes
