@@ -10,9 +10,9 @@ using ExceptionsLibrary;
 
 namespace Watcher
 {
-    public class Watch
+    public class Watch : IWatch
     {
-        public event EventHandler<ProcesesEventArgs> Ploddered;
+        public event EventHandler<ProcesesEventArgs> Started;
         private bool on = true;
 
         private ProcesesEventArgs CreateProcesesEventArgs(int counter, string name)
@@ -31,14 +31,14 @@ namespace Watcher
 
         public async void Start()
         {
-            string [] fileList = Directory.GetFiles($@"C:\Users\rsemeniak\Downloads\Supervisor\Supervisor\Supervisor\Watcher\XmlFiles");
+            string [] fileList = Directory.GetFiles($@"netcoreapp3.1\XmlFiles");
 
             if (fileList.Length == 0)
             {
                 throw new XmlFileNotFoundException();
             }
 
-            List<LittleProcess> list = Deserializetion(fileList);
+            List<LittleProcess> list = Deserialization(fileList);
             await Task.Run(() => Warden(list));
         }
 
@@ -47,14 +47,14 @@ namespace Watcher
             on = false;
         }
 
-        private List<LittleProcess> Deserializetion(string[] files)
+        private List<LittleProcess> Deserialization(string[] files)
         {
             List<LittleProcess> list = new List<LittleProcess>();
             var fileSystem = new FileSystem();
 
             foreach (string i in files)
             {
-                list.Add(fileSystem.Deserializetion(i));
+                list.Add(fileSystem.Deserialization(i));
             }
             return list;
         }
@@ -68,16 +68,17 @@ namespace Watcher
             { 
                 shortProcesses = action.List();
                 var sortProc = shortProcesses.Where(x => x.Name == i.Name);
-                OnProcesesEventArgs(CreateProcesesEventArgs(sortProc.Count(), i.Name),Ploddered);
+                OnProcesesEventArgs(CreateProcesesEventArgs(sortProc.Count(), i.Name),Started);
             }
         }
         private void Warden(List<LittleProcess> processes)
         {
-            while (on)
+            //fix this!
+            /* while (on)
             {
                 Plodder(processes);
                 Thread.Sleep(5000);
-            }
+            } */
         }
     }
 }

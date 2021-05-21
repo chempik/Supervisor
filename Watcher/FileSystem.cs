@@ -10,7 +10,7 @@ namespace Watcher
     {
         public void Create(ShortProcess proc)
         {
-            string fileName = $@"C:\Users\rsemeniak\Downloads\Supervisor\Supervisor\Supervisor\Watcher\XmlFiles\{proc.Name}.xml";
+            string fileName = $@"XmlFiles\{proc.Name}.xml";
             SerializeXml(proc, fileName);
         }
 
@@ -27,11 +27,11 @@ namespace Watcher
 
         public void Check(string file)
         {
-            string absulute = @"..\XmlFiles\" + file;
+            string absulute = @"XmlFiles\" + file;
             File.Exists(absulute);
         }
 
-        public LittleProcess Deserializetion(string file)
+        public LittleProcess Deserialization(string file)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(LittleProcess));
             XDocument xdoc = XDocument.Load("file");
