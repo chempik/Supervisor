@@ -568,6 +568,20 @@
         "runtime": {
           "bin/placeholder/LibaryCore.dll": {}
         }
+      },
+      "Watcher/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "ExceptionsLibrary": "1.0.0",
+          "LibaryCore": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Watcher.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Watcher.dll": {}
+        }
       }
     }
   },
@@ -1784,13 +1798,19 @@
       "type": "project",
       "path": "../LibaryCore/LibaryCore.csproj",
       "msbuildProject": "../LibaryCore/LibaryCore.csproj"
+    },
+    "Watcher/1.0.0": {
+      "type": "project",
+      "path": "../Watcher/Watcher.csproj",
+      "msbuildProject": "../Watcher/Watcher.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "ConsoleAppFramework >= 3.3.0",
       "ConsoleTables >= 2.4.2",
-      "LibaryCore >= 1.0.0"
+      "LibaryCore >= 1.0.0",
+      "Watcher >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1822,6 +1842,9 @@
           "projectReferences": {
             "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
               "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj"
+            },
+            "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj": {
+              "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj"
             }
           }
         }

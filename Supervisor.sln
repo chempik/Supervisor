@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupervisorConsole", "Superv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibaryCore", "LibaryCore\LibaryCore.csproj", "{2EF0E4A2-5D7A-4E31-9196-C099C39B75B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionsLibrary", "ExceptionsLibrary\ExceptionsLibrary.csproj", "{32CD4D53-7B4E-4981-B1B8-DE2223D64680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExceptionsLibrary", "ExceptionsLibrary\ExceptionsLibrary.csproj", "{32CD4D53-7B4E-4981-B1B8-DE2223D64680}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watcher", "Watcher\Watcher.csproj", "{FD2A894F-F2F1-4ACF-9A9C-140B8C614E7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{32CD4D53-7B4E-4981-B1B8-DE2223D64680}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32CD4D53-7B4E-4981-B1B8-DE2223D64680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32CD4D53-7B4E-4981-B1B8-DE2223D64680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD2A894F-F2F1-4ACF-9A9C-140B8C614E7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2A894F-F2F1-4ACF-9A9C-140B8C614E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2A894F-F2F1-4ACF-9A9C-140B8C614E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2A894F-F2F1-4ACF-9A9C-140B8C614E7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

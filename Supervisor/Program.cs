@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using ConsoleTables;
 using LibaryCore;
+using Watcher;
 
 
 namespace SupervisorConsole
@@ -106,6 +107,13 @@ namespace SupervisorConsole
                 table.AddRow(i.Name, i.Id);
             }
             table.Write();
+        }
+
+        [Command("File")]
+        public void fileTest()
+        {
+            FileSystem kek = new FileSystem();
+            kek.Create(actions.Details("Taskmgr"));
         }
     }
 }
