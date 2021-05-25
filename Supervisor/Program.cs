@@ -112,8 +112,15 @@ namespace SupervisorConsole
         [Command("File")]
         public void fileTest()
         {
-            FileSystem kek = new FileSystem();
-            kek.Create(actions.Details("Taskmgr"));
+            FileSystem fileSystem = new FileSystem();
+            fileSystem.Create(actions.Details("Taskmgr"));
+        }
+        
+        [Command ("Start")]
+        public void Start()
+        {
+            Watch a = new Watch();
+            a.WatchForProcessStart();
         }
     }
 }

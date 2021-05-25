@@ -7,29 +7,15 @@ using System.IO;
 using LibaryCore;
 using System.Linq;
 using ExceptionsLibrary;
+using System.Diagnostics;
+using System.Management;
 
 namespace Watcher
 {
-    public class Watch : IWatch
+    public class Watch
     {
-        public event EventHandler<ProcesesEventArgs> Started;
-        private bool on = true;
 
-        private ProcesesEventArgs CreateProcesesEventArgs(int counter, string name)
-        {
-            ProcesesEventArgs args = new ProcesesEventArgs();
-            args.Counter = counter;
-            args.Name = name;
-            return args;
-        }
-
-        protected virtual void OnProcesesEventArgs(ProcesesEventArgs e, EventHandler<ProcesesEventArgs> occasion)
-        {
-            EventHandler<ProcesesEventArgs> raiseEvent = occasion;
-            raiseEvent?.Invoke(this, e);
-        }
-
-        public async void Start()
+       /* public  void Start()
         {
             string [] fileList = Directory.GetFiles($@"netcoreapp3.1\XmlFiles");
 
@@ -39,13 +25,8 @@ namespace Watcher
             }
 
             List<LittleProcess> list = Deserialization(fileList);
-            await Task.Run(() => Warden(list));
-        }
-
-        public void End()
-        {
-            on = false;
-        }
+          //  await Task.Run(() => Warden(list));
+        }*/
 
         private List<LittleProcess> Deserialization(string[] files)
         {
@@ -59,26 +40,79 @@ namespace Watcher
             return list;
         }
 
-        private void Plodder(List<LittleProcess> processes)
+        public EventHandler<EventArgs> started;
+        public EventHandler<EventArgs> finished;
+        private ManagementEventWatcher startProcWatcher;
+        private ManagementEventWatcher endProcWatcher;
+        /*
+        protected virtual void OnEvent(EventArgs e, EventHandler<EventArgs> eve)
         {
-            var action = new ActionsProceses();
-            List<ShortProcess> shortProcesses = new List<ShortProcess>();
+            EventHandler<EventArgs> raiseEvent = eve;
+            raiseEvent?.Invoke(this, e);
+        }
 
-            foreach (var i in processes) 
-            { 
-                shortProcesses = action.List();
-                var sortProc = shortProcesses.Where(x => x.Name == i.Name);
-                OnProcesesEventArgs(CreateProcesesEventArgs(sortProc.Count(), i.Name),Started);
-            }
-        }
-        private void Warden(List<LittleProcess> processes)
+        public void StopAllWatchers()
         {
-            //fix this!
-            /* while (on)
-            {
-                Plodder(processes);
-                Thread.Sleep(5000);
-            } */
+            startProcWatcher.Stop();
+            endProcWatcher.Stop();
+        }*/
+
+        public void WatchForProcessStart()
+        {
+            string queryString =
+                "SELECT TargetInstance" +
+                "  FROM __InstanceCreationEvent " +
+                "WITHIN  .025 " +
+                " WHERE TargetInstance ISA 'Win32_Process' "
+                //+ "   AND TargetInstance.Name = '" + processName + "'";
+                + "   AND TargetInstance.Name like '%'";
+
+            // The dot in the scope means use the current machine
+            string scope = @"\\.\root\CIMV2";
+
+            // Create a watcher and listen for events
+            startProcWatcher = new ManagementEventWatcher(scope, queryString);
+            startProcWatcher.EventArrived += ProcessStarted;
+            startProcWatcher.Start();
+
         }
+
+        private void ProcessStarted(object sender, EventArrivedEventArgs e)
+        {
+            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
+            string processName = targetInstance.Properties["Name"].Value.ToString();
+            string exePath = targetInstance.Properties["ExecutablePath"].Value.ToString();
+            string action = "BEGAN";
+            Console.WriteLine(String.Format("{0}|\t{1}|\t{2}|\t{3}", DateTime.Now, action, processName, exePath));
+        }
+
+        private void WatchForProcessEnd()
+        {
+            string queryString =
+                "SELECT TargetInstance" +
+                "  FROM __InstanceDeletionEvent " +
+                "WITHIN  .025 " +
+                " WHERE TargetInstance ISA 'Win32_Process' "
+                //+ "   AND TargetInstance.Name = '" + processName + "'";
+                + "   AND TargetInstance.Name like '%'";
+            // The dot in the scope means use the current machine
+            string scope = @"\\.\root\CIMV2";
+
+            // Create a watcher and listen for events
+            endProcWatcher = new ManagementEventWatcher(scope, queryString);
+            endProcWatcher.EventArrived += ProcessEnded;
+            endProcWatcher.Start();
+        }
+
+        private void ProcessEnded(object sender, EventArrivedEventArgs e)
+        {
+            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
+            string processName = targetInstance.Properties["Name"].Value.ToString();
+            string action = "ENDED";
+
+            Console.WriteLine(String.Format("{0}|{1}|{2}", DateTime.Now, action, processName));
+        }
+
+
     }
 }

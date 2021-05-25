@@ -8,6 +8,8 @@
   <ItemGroup>
     <PackageReference Include="ConsoleAppFramework" Version="3.3.0" />
     <PackageReference Include="ConsoleTables" Version="2.4.2" />
+    <PackageReference Include="Microsoft.Orleans.Core" Version="3.4.2" />
+    <PackageReference Include="System.Management" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
