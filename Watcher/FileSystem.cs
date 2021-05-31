@@ -34,8 +34,8 @@ namespace Watcher
         public LittleProcess Deserialization(string file)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(LittleProcess));
-            XDocument xdoc = XDocument.Load("file");
-            using (FileStream fs = new FileStream("file", FileMode.OpenOrCreate))
+            XDocument xdoc = XDocument.Load(file);
+            using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate))
             {
                 LittleProcess newProces = (LittleProcess)formatter.Deserialize(fs);
                 return newProces;

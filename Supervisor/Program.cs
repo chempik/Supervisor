@@ -116,11 +116,21 @@ namespace SupervisorConsole
             fileSystem.Create(actions.Details("Taskmgr"));
         }
         
-        [Command ("Start")]
-        public void Start()
+        [Command ("Watch")]
+        public void Watch()
         {
             Watch a = new Watch();
             a.WatchForProcessStart();
+            a.WatchForProcessEnd();
+             
+
+           /*var wmiClass = new System.Management.ManagementClass("Win32_ComputerSystem");
+            foreach (var prop in wmiClass.Properties)
+            {
+                Console.WriteLine(prop.Name);
+
+            }*/
+            Console.ReadKey();
         }
     }
 }
