@@ -119,18 +119,34 @@ namespace SupervisorConsole
         [Command ("Watch")]
         public void Watch()
         {
-            Watch a = new Watch();
-            a.WatchForProcessStart();
-            a.WatchForProcessEnd();
-             
-
-           /*var wmiClass = new System.Management.ManagementClass("Win32_ComputerSystem");
-            foreach (var prop in wmiClass.Properties)
+            Watch watch = new Watch();
+            watch.started += delegate (object sender, ProcesesEventArgs e)
             {
-                Console.WriteLine(prop.Name);
+                var table = new ConsoleTable("Name", "Id");
+                for (int i = 0; i< e.proc.Count; i++)
+                {
+                    table.AddRow(e.proc[i].Name, e.proc[i].Id);
+                }
+                table.Write();
+            };
 
-            }*/
-            Console.ReadKey();
+            watch.opened += delegate (object sender, ProcesesEventArgs e)
+            {
+                for (int i = 0; i < e.proc.Count; i++)
+                {
+                    Console.WriteLine($"new proces, name - {e.proc[i].Name}, id - {e.proc[i].Id}");
+                }
+            };
+
+            watch.ended += delegate (object sender, ProcesesEventArgs e)
+            {
+                for (int i = 0; i < e.proc.Count; i++)
+                {
+                    Console.WriteLine($"stop proces, name - {e.proc[i].Name}, id - {e.proc[i].Id}");
+                }
+            };
+
+            watch.Start();
         }
     }
 }
