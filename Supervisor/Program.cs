@@ -110,10 +110,43 @@ namespace SupervisorConsole
         }
 
         [Command("File")]
-        public void fileTest()
+        public void fileTest([Option(0)] string name)
         {
-            FileSystem kek = new FileSystem();
-            kek.Create(actions.Details("Taskmgr"));
+            FileSystem fileSystem = new FileSystem();
+            fileSystem.Create(actions.Details(name));
+        }
+        
+        [Command ("Watch")]
+        public void Watch()
+        {
+            Watch watch = new Watch();
+            watch.started += delegate (object sender, ProcesesEventArgs e)
+            {
+                var table = new ConsoleTable("Name", "Id");
+                for (int i = 0; i< e.proc.Count; i++)
+                {
+                    table.AddRow(e.proc[i].Name, e.proc[i].Id);
+                }
+                table.Write();
+            };
+
+            watch.opened += delegate (object sender, ProcesesEventArgs e)
+            {
+                for (int i = 0; i < e.proc.Count; i++)
+                {
+                    Console.WriteLine($"new proces, name - {e.proc[i].Name}, id - {e.proc[i].Id}");
+                }
+            };
+
+            watch.ended += delegate (object sender, ProcesesEventArgs e)
+            {
+                for (int i = 0; i < e.proc.Count; i++)
+                {
+                    Console.WriteLine($"stop proces, name - {e.proc[i].Name}, id - {e.proc[i].Id}");
+                }
+            };
+
+            watch.Start();
         }
     }
 }
