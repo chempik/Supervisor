@@ -110,10 +110,10 @@ namespace SupervisorConsole
         }
 
         [Command("File")]
-        public void fileTest()
+        public void fileTest([Option(0)] string name)
         {
             FileSystem fileSystem = new FileSystem();
-            fileSystem.Create(actions.Details("Taskmgr"));
+            fileSystem.Create(actions.Details(name));
         }
         
         [Command ("Watch")]

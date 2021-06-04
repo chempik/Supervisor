@@ -31,7 +31,7 @@ namespace Watcher
             File.Exists(absulute);
         }
 
-        public LittleProcess Deserialization(string file)
+        public LittleProcess Deserialize(string file)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(LittleProcess));
             XDocument xdoc = XDocument.Load(file);

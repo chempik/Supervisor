@@ -12,21 +12,22 @@ using System.Management;
 
 namespace Watcher
 {
-    public class Watch
+    public class Watch : IWatch
     {
-
         private const string  _file = @"XmlFiles";
-        private List<ShortProcess> _proceses = new List<ShortProcess>();
+        private List<ShortProcess> _proceses;
         private ActionsProceses action = new ActionsProceses();
+        private int[] oldId;
 
-        public event EventHandler<ProcesesEventArgs> started;
-        public event EventHandler<ProcesesEventArgs> opened;
-        public event EventHandler<ProcesesEventArgs> ended;
+        public event EventHandler<ProcesesEventArgs> Started;
+        public event EventHandler<ProcesesEventArgs> Opened;
+        public event EventHandler<ProcesesEventArgs> Ended;
         protected virtual void OnProcesesEventArgs (ProcesesEventArgs e, EventHandler<ProcesesEventArgs> occasion)
         {
             EventHandler<ProcesesEventArgs> raiseEvent = occasion;
             raiseEvent?.Invoke(this, e);
         }
+
         private ProcesesEventArgs CreateProcesesEventArgs (List<ShortProcess> proc)
         {
             ProcesesEventArgs args = new ProcesesEventArgs();
@@ -34,7 +35,7 @@ namespace Watcher
             return args;
         }
 
-        private List<LittleProcess> Deserialization(string files)
+        private List<LittleProcess> Deserialize(string files)
         {
             string[] FileArray = Directory.GetFiles(files);
             List<LittleProcess> list = new List<LittleProcess>();
@@ -42,8 +43,9 @@ namespace Watcher
 
             foreach (string i in FileArray)
             {
-                list.Add(fileSystem.Deserialization(i));
+                list.Add(fileSystem.Deserialize(i));
             }
+
             return list;
         }
         
@@ -52,59 +54,54 @@ namespace Watcher
             List<ShortProcess> list = action.List();
             List<ShortProcess> sorted = new List<ShortProcess>();
 
-            foreach (var i in Deserialization(_file))
+            foreach (var i in Deserialize(_file))
             {
                 var tmp = list.Where(x => x.Name == i.Name);
                 sorted.AddRange(tmp);
             }
 
-                // return sorted.Select(x => x.Id).ToArray();
-                return sorted;
-
+            return sorted;
         }
 
         public void Start()
         {
             List<ShortProcess> list = CheckProceses();
 
-            if (_proceses == null)
+            if (oldId == null)
             {
-                _proceses = list;
-                
-                OnProcesesEventArgs(CreateProcesesEventArgs(_proceses), started);
+                oldId = list.Select(x => x.Id).ToArray();
+
+                OnProcesesEventArgs(CreateProcesesEventArgs(list), Started);
             }
+
             else
             {
                 int[] id = list.Select(x => x.Id).ToArray();
-                int[] oldId = _proceses.Select(x => x.Id).ToArray();
-                List<ShortProcess> addProc = new List<ShortProcess>();
-                List<ShortProcess> endProc = new List<ShortProcess>();
                 
                 var addId = id.Except(oldId);
-                foreach (var i in addId)
-                {
-                    var tmp = list.Where(x => x.Id == i);
-                    addProc.AddRange(tmp);
-                }
-                if (addProc != null)
-                {
-                    OnProcesesEventArgs(CreateProcesesEventArgs(addProc), opened);
-                }
+                Check(addId, list, Opened);
 
                 var deleteId = oldId.Except(id);
-                foreach (var i in deleteId)
-                {
-                    var tmp = _proceses.Where(x => x.Id == i);
-                    endProc.AddRange(tmp);
-                }
-                if (endProc != null)
-                {
-                    OnProcesesEventArgs(CreateProcesesEventArgs(endProc), ended);
-                }
+                Check(deleteId, list, Ended);
+               
+                oldId = id;
             }
 
             Thread.Sleep(5000);
             Start();
+        }
+        private void Check(IEnumerable<int> id, List<ShortProcess> sProc, EventHandler<ProcesesEventArgs> e)
+        {
+            List<ShortProcess> checkId = new List<ShortProcess>();
+            foreach (var i in id)
+            {
+                var tmp = sProc.Where(x => x.Id == i);
+                checkId.AddRange(tmp);
+            }
+            if (checkId.Count != 0)
+            {
+                OnProcesesEventArgs(CreateProcesesEventArgs(checkId), e);
+            }
         }
     }
 }

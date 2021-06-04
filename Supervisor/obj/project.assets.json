@@ -6877,19 +6877,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rsemeniak\\.nuget\\packages\\": {}
+    "C:\\Users\\Ruslan\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+      "projectUniqueName": "C:\\Users\\Ruslan\\Downloads\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
       "projectName": "SupervisorConsole",
-      "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
-      "packagesPath": "C:\\Users\\rsemeniak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\obj\\",
+      "projectPath": "C:\\Users\\Ruslan\\Downloads\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+      "packagesPath": "C:\\Users\\Ruslan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ruslan\\Downloads\\Supervisor\\Supervisor\\Supervisor\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\rsemeniak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ruslan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6901,13 +6905,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
-              "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj"
+            "C:\\Users\\Ruslan\\Downloads\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
+              "projectPath": "C:\\Users\\Ruslan\\Downloads\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj"
             },
-            "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj": {
-              "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj"
+            "C:\\Users\\Ruslan\\Downloads\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj": {
+              "projectPath": "C:\\Users\\Ruslan\\Downloads\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj"
             }
           }
         }
@@ -6920,7 +6923,6 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "ConsoleAppFramework": {
             "target": "Package",
@@ -6954,7 +6956,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
