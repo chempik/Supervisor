@@ -15,7 +15,6 @@ namespace Watcher
     public class Watch : IWatch
     {
         private const string  _file = @"XmlFiles";
-        private List<ShortProcess> _proceses;
         private ActionsProceses action = new ActionsProceses();
         private int[] oldId;
 
@@ -35,7 +34,7 @@ namespace Watcher
             return args;
         }
 
-        private List<LittleProcess> Deserialize(string files)
+        internal List<LittleProcess> Deserialize(string files)
         {
             string[] FileArray = Directory.GetFiles(files);
             List<LittleProcess> list = new List<LittleProcess>();
@@ -87,7 +86,7 @@ namespace Watcher
                 oldId = id;
             }
 
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             Start();
         }
         private void Check(IEnumerable<int> id, List<ShortProcess> sProc, EventHandler<ProcesesEventArgs> e)

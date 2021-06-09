@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExceptionsLibrary\ExceptionsLibrary.csproj" />
+    <ProjectReference Include="..\LibaryCore\LibaryCore.csproj" />
+    <ProjectReference Include="..\Watcher\Watcher.csproj" />
+  </ItemGroup>
+
+</Project>

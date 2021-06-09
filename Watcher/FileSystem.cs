@@ -8,15 +8,15 @@ namespace Watcher
 {
     public class FileSystem
     {
-        public void Create(ShortProcess proc)
+        public void Create(ShortProcess proc, bool autorun, bool numerosityOn, int numerosity)
         {
             string fileName = $@"XmlFiles\{proc.Name}.xml";
-            SerializeXml(proc, fileName);
+            SerializeXml(proc, fileName,  autorun,  numerosityOn, numerosity);
         }
 
-        private void SerializeXml(ShortProcess proc, string file)
+        private void SerializeXml(ShortProcess proc, string file, bool autorun, bool numerosityOn, int numerosity)
         {
-            LittleProcess littleProcess = new LittleProcess(proc.Name);
+            LittleProcess littleProcess = new LittleProcess(proc.Name,autorun,numerosityOn,numerosity,proc.Location);
             XmlSerializer formatter = new XmlSerializer(typeof(LittleProcess));
             
             using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate))

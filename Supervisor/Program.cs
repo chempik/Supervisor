@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ConsoleTables;
 using LibaryCore;
 using Watcher;
+using Track;
 
 
 namespace SupervisorConsole
@@ -110,17 +111,18 @@ namespace SupervisorConsole
         }
 
         [Command("File")]
-        public void fileTest([Option(0)] string name)
+        public void fileTest([Option(0)] string name, bool autorun, bool numerosityOn)
         {
+           // int numerosityInt = Int32.Parse(numerosity);
             FileSystem fileSystem = new FileSystem();
-            fileSystem.Create(actions.Details(name));
+            fileSystem.Create(actions.Details("msedge"), autorun, numerosityOn, 15);
         }
         
         [Command ("Watch")]
         public void Watch()
         {
             Watch watch = new Watch();
-            watch.started += delegate (object sender, ProcesesEventArgs e)
+            watch.Started += delegate (object sender, ProcesesEventArgs e)
             {
                 var table = new ConsoleTable("Name", "Id");
                 for (int i = 0; i< e.proc.Count; i++)
@@ -130,7 +132,7 @@ namespace SupervisorConsole
                 table.Write();
             };
 
-            watch.opened += delegate (object sender, ProcesesEventArgs e)
+            watch.Opened += delegate (object sender, ProcesesEventArgs e)
             {
                 for (int i = 0; i < e.proc.Count; i++)
                 {
@@ -138,7 +140,7 @@ namespace SupervisorConsole
                 }
             };
 
-            watch.ended += delegate (object sender, ProcesesEventArgs e)
+            watch.Ended += delegate (object sender, ProcesesEventArgs e)
             {
                 for (int i = 0; i < e.proc.Count; i++)
                 {
