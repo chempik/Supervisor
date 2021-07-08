@@ -164,5 +164,32 @@ namespace LibaryCore
             }
             return list;
         }
+
+        public bool KillOneProcess(string nameProceses)
+        {
+            Process[] Proc = Process.GetProcesses();
+            try
+            {
+                Process killed = Proc.First(x => x.ProcessName == nameProceses);
+                killed.Kill(false);
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new IdNotFoundException();
+            }
+            catch (NotSupportedException)
+            {
+                throw new IdNotFoundException();
+            }
+            catch (InvalidOperationException)
+            {
+                throw new IdNotFoundException();
+            }
+            catch (AggregateException)
+            {
+                throw new IdNotFoundException();
+            }
+        }
     }
 }

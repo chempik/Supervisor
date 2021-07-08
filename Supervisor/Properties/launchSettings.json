@@ -2,7 +2,7 @@
   "profiles": {
     "SupervisorConsole": {
       "commandName": "Project",
-      "commandLineArgs": "File \"chrome\" false true"
+      "commandLineArgs": "Watch"
     }
   }
 }

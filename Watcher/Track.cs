@@ -3,30 +3,54 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using LibaryCore;
+using Setting;
 
 namespace Watcher
 {
     public class Track
     {
         private const string _file = @"XmlFiles";
-        private Watch _watch = new Watch();
         private ActionsProceses _actions = new ActionsProceses();
 
-        public void Treker()
+        private List<Proc> Data()
         {
-            List<LittleProcess> list = _watch.Deserialize(_file);
-            var sortedList = list.Where(x => x.NumerosityOn == true);
-            var allProces = _actions.List();
+            var set = new Watch().Deserialize(_file);
+
+            var proceses = new List<Proc>();
+
+           foreach (var i in set)
+            {
+                foreach (var j in i.Proceses)
+                {
+                    j.Name = i.Name;
+                    j.Link = i.Link;
+                    proceses.Add(j);
+                }
+            }
+
+            return proceses;
         }
 
         public void Autorun()
         {
-            List<LittleProcess> list = _watch.Deserialize(_file);
-            var sortedList = list.Where(x => x.Autorun == true);
-            
-            foreach (var i in sortedList)
+            var list = Data().Where(x => x.GetType() == typeof(AuTorunProc));
+            foreach (var i in list)
             {
                 _actions.Start(i.Link);
+            }
+        }
+
+        public void TrackProc(List<ShortProcess> SProc)
+        {
+
+            List<TrackProc> list = (List<TrackProc>)Data().Where(x => x.GetType() == typeof(TrackProc));
+            foreach (var i in list)
+            {
+                var proces = SProc.Where(x => x.Name == i.Name);
+                while (proces.Count() > i.Track)
+                {
+                        _actions.KillOneProcess(i.Name);
+                }
             }
         }
     }
