@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using LibaryCore;
 using System.Linq;
+using Setting;
 using ExceptionsLibrary;
 using System.Diagnostics;
 using System.Management;
@@ -15,13 +16,13 @@ namespace Watcher
     public class Watch : IWatch
     {
         private const string  _file = @"XmlFiles";
-        private List<ShortProcess> _proceses;
         private ActionsProceses action = new ActionsProceses();
         private int[] oldId;
 
         public event EventHandler<ProcesesEventArgs> Started;
         public event EventHandler<ProcesesEventArgs> Opened;
         public event EventHandler<ProcesesEventArgs> Ended;
+
         protected virtual void OnProcesesEventArgs (ProcesesEventArgs e, EventHandler<ProcesesEventArgs> occasion)
         {
             EventHandler<ProcesesEventArgs> raiseEvent = occasion;
@@ -35,10 +36,10 @@ namespace Watcher
             return args;
         }
 
-        private List<LittleProcess> Deserialize(string files)
+        internal List<Set> Deserialize(string files)
         {
             string[] FileArray = Directory.GetFiles(files);
-            List<LittleProcess> list = new List<LittleProcess>();
+            List<Set> list = new List<Set>();
             var fileSystem = new FileSystem();
 
             foreach (string i in FileArray)
@@ -86,10 +87,12 @@ namespace Watcher
                
                 oldId = id;
             }
-
-            Thread.Sleep(5000);
+            var track = new Track();
+            track.TrackProc(list);
+            Thread.Sleep(3000);
             Start();
         }
+
         private void Check(IEnumerable<int> id, List<ShortProcess> sProc, EventHandler<ProcesesEventArgs> e)
         {
             List<ShortProcess> checkId = new List<ShortProcess>();

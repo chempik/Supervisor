@@ -5,17 +5,19 @@ using System.Threading.Tasks;
 using ConsoleTables;
 using LibaryCore;
 using Watcher;
-
+using Setting;
 
 namespace SupervisorConsole
 {
     internal class Program : ConsoleAppBase
     {
         private ActionsProceses actions = new ActionsProceses();
-
         static async Task Main(string[] args)
         {
             // target T as ConsoleAppBase.
+            var track = new Track();
+            track.Autorun();
+
             await Host.CreateDefaultBuilder().RunConsoleAppFrameworkAsync<Program>(args);
         }
 
@@ -110,17 +112,22 @@ namespace SupervisorConsole
         }
 
         [Command("File")]
-        public void fileTest([Option(0)] string name)
+        public void fileTest()
         {
+           // int numerosityInt = Int32.Parse(numerosity);
             FileSystem fileSystem = new FileSystem();
-            fileSystem.Create(actions.Details(name));
+            //fileSystem.Create(actions.Details("msedge"), autorun, numerosityOn, 15);
+            Proc[] procs = new Proc[] {new AuTorunProc(), new TrackProc() };
+            var set = new Set("opera", $@"C:\Users\Ruslan\AppData\Local\Programs\Opera\launcher.exe", procs);
+
+            fileSystem.Create(set);
         }
         
         [Command ("Watch")]
         public void Watch()
         {
             Watch watch = new Watch();
-            watch.started += delegate (object sender, ProcesesEventArgs e)
+            watch.Started += delegate (object sender, ProcesesEventArgs e)
             {
                 var table = new ConsoleTable("Name", "Id");
                 for (int i = 0; i< e.proc.Count; i++)
@@ -130,7 +137,7 @@ namespace SupervisorConsole
                 table.Write();
             };
 
-            watch.opened += delegate (object sender, ProcesesEventArgs e)
+            watch.Opened += delegate (object sender, ProcesesEventArgs e)
             {
                 for (int i = 0; i < e.proc.Count; i++)
                 {
@@ -138,7 +145,7 @@ namespace SupervisorConsole
                 }
             };
 
-            watch.ended += delegate (object sender, ProcesesEventArgs e)
+            watch.Ended += delegate (object sender, ProcesesEventArgs e)
             {
                 for (int i = 0; i < e.proc.Count; i++)
                 {
