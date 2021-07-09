@@ -17,7 +17,9 @@ namespace Watcher
     {
         private const string  _file = @"XmlFiles";
         private ActionsProceses action = new ActionsProceses();
-        private int[] oldId;
+        private int[] _oldId;
+        private string[] _oldName;
+        private int _time = 5000;
 
         public event EventHandler<ProcesesEventArgs> Started;
         public event EventHandler<ProcesesEventArgs> Opened;
@@ -68,28 +70,31 @@ namespace Watcher
         {
             List<ShortProcess> list = CheckProceses();
 
-            if (oldId == null)
-            {
-                oldId = list.Select(x => x.Id).ToArray();
+            var track = new Track();
 
+            if (_oldId == null)
+            {
+                _oldId = list.Select(x => x.Id).ToArray();
+                _oldName = list.Select(x => x.Name).ToArray();
                 OnProcesesEventArgs(CreateProcesesEventArgs(list), Started);
             }
 
             else
             {
                 int[] id = list.Select(x => x.Id).ToArray();
-                
-                var addId = id.Except(oldId);
+                string[] name = list.Select(x => x.Name).ToArray();
+                var addId = id.Except(_oldId);
                 Check(addId, list, Opened);
 
-                var deleteId = oldId.Except(id);
+                var deleteId = _oldId.Except(id);
                 Check(deleteId, list, Ended);
-               
-                oldId = id;
+
+                _oldId = id;
+                _oldName = track.AutorestartProc(name,_oldName);
             }
-            var track = new Track();
+            
             track.TrackProc(list);
-            Thread.Sleep(3000);
+            Thread.Sleep(_time);
             Start();
         }
 

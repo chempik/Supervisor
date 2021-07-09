@@ -14,7 +14,8 @@ namespace Watcher
 
         private List<Proc> Data()
         {
-            var set = new Watch().Deserialize(_file);
+            var watch = new Watch();
+            var set = watch.Deserialize(_file);
 
             var proceses = new List<Proc>();
 
@@ -40,10 +41,25 @@ namespace Watcher
             }
         }
 
+        public string[] AutorestartProc (string[] Name, string[] oldName)
+        {
+            List<string> names = Name.ToList();
+            List<AutorestartProc> list = (List<AutorestartProc>)Data().Where(x => x.GetType() == typeof(AutorestartProc));
+            foreach (var i in list)
+            {
+                if (oldName.Contains(i.Name) && !Name.Contains(i.Name))
+                {
+                    _actions.Start(i.Link);
+                    names.Add(i.Name);
+                }
+            }
+            return names.ToArray();
+        }
+
         public void TrackProc(List<ShortProcess> SProc)
         {
-
             List<TrackProc> list = (List<TrackProc>)Data().Where(x => x.GetType() == typeof(TrackProc));
+
             foreach (var i in list)
             {
                 var proces = SProc.Where(x => x.Name == i.Name);

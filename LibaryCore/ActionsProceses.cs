@@ -51,17 +51,17 @@ namespace LibaryCore
                 Process added = Process.Start(link);
                 return CreateShortProcess(added);
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException ex)
             {
-                throw new ExeNotFoundException();
+                throw new ExeNotFoundException("The PATH environment variable has a string containing quotes.", ex);
             }
-            catch (ObjectDisposedException)
+            catch (ObjectDisposedException ex )
             {
-                throw new ExeNotFoundException();
+                throw new ExeNotFoundException("The process object has already been disposed.", ex);
             }
-            catch (Win32Exception)
+            catch (Win32Exception ex)
             {
-                throw new ExeNotFoundException();
+                throw new ExeNotFoundException("The associated process could not be terminated.", ex);
             }
         }
         /// <summary>
@@ -78,21 +78,21 @@ namespace LibaryCore
                 killed.Kill(true);
                 return true;
             }
-            catch (Win32Exception) 
+            catch (Win32Exception ex)
             {
-                throw new IdNotFoundException();
+                throw new IdNotFoundException("The associated process could not be terminated.", ex);
             }
-            catch (NotSupportedException)
+            catch (NotSupportedException ex)
             {
-                throw new IdNotFoundException();
+                throw new IdNotFoundException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                throw new IdNotFoundException();
+                throw new IdNotFoundException("There is no process associated with this Process object.", ex);
             }
-            catch (AggregateException)
+            catch (AggregateException ex)
             {
-                throw new IdNotFoundException();
+                throw new IdNotFoundException("error in one of the threads, the system interrupts the execution of all threads", ex);
             }
         }
 
@@ -110,21 +110,21 @@ namespace LibaryCore
                 killed.Kill(true);
                 return true;
             }
-            catch (Win32Exception)
+            catch (Win32Exception ex)
             {
-                throw new NameNotFoundException();
+                throw new IdNotFoundException("The associated process could not be terminated.", ex);
             }
-            catch (NotSupportedException)
+            catch (NotSupportedException ex)
             {
-                throw new NameNotFoundException();
+                throw new IdNotFoundException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                throw new NameNotFoundException();
+                throw new IdNotFoundException("There is no process associated with this Process object.", ex);
             }
-            catch (AggregateException)
+            catch (AggregateException ex)
             {
-                throw new NameNotFoundException();
+                throw new IdNotFoundException("error in one of the threads, the system interrupts the execution of all threads", ex);
             }
         }
         /// <summary>
@@ -174,21 +174,21 @@ namespace LibaryCore
                 killed.Kill(false);
                 return true;
             }
-            catch (Win32Exception)
+            catch (Win32Exception ex)
             {
-                throw new IdNotFoundException();
+                throw new IdNotFoundException("The associated process could not be terminated.", ex) ;
             }
-            catch (NotSupportedException)
+            catch (NotSupportedException ex)
             {
-                throw new IdNotFoundException();
+                throw new IdNotFoundException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                throw new IdNotFoundException();
+                throw new IdNotFoundException("There is no process associated with this Process object.", ex);
             }
-            catch (AggregateException)
+            catch (AggregateException ex)
             {
-                throw new IdNotFoundException();
+                throw new IdNotFoundException("error in one of the threads, the system interrupts the execution of all threads", ex);
             }
         }
     }

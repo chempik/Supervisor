@@ -8,7 +8,7 @@ using LibaryCore;
 using Setting;
 namespace Watcher
 {
-    public class FileSystem
+    public class FileSystem : ICreate
     {
         internal Set Deserialize(string file)
         {
