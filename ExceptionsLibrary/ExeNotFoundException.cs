@@ -4,14 +4,8 @@ namespace ExceptionsLibrary
 {
     public class ExeNotFoundException : Exception
     {
-        public string Message { get; set; }
-        public Exception Except { get; set; }
-        public ExeNotFoundException(string message, Exception except)
+        public ExeNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
-            Message = message;
-            Except = except;
         }
-        public ExeNotFoundException() { }
-
     }
 }

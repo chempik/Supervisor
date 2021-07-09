@@ -6,13 +6,8 @@ namespace ExceptionsLibrary
 {
     public class IdNotFoundException : Exception
     {
-        public string Message { get; set; }
-        public Exception Except {get; set;}
-        public IdNotFoundException (string message, Exception except)
+        public IdNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
-            Message = message;
-            Except = except;
         }
-        public IdNotFoundException() { }
     }
 }
