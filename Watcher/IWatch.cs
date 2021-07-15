@@ -6,6 +6,6 @@ namespace Watcher
 {
     public interface IWatch
     {
-        public void Start();
+        public void Start(ref bool start);
     }
 }

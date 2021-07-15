@@ -15,15 +15,21 @@ namespace Watcher
 {
     public class Watch : IWatch
     {
-        private const string  _file = @"XmlFiles";
+        private readonly string  _file;
         private ActionsProceses action = new ActionsProceses();
         private int[] _oldId;
         private string[] _oldName;
         private int _time = 5000;
+        
 
         public event EventHandler<ProcesesEventArgs> Started;
         public event EventHandler<ProcesesEventArgs> Opened;
         public event EventHandler<ProcesesEventArgs> Ended;
+
+        public Watch (string folder)
+        {
+            _file = folder;
+        }
 
         protected virtual void OnProcesesEventArgs (ProcesesEventArgs e, EventHandler<ProcesesEventArgs> occasion)
         {
@@ -38,9 +44,9 @@ namespace Watcher
             return args;
         }
 
-        internal List<Set> Deserialize(string files)
+        internal List<Set> Deserialize()
         {
-            string[] FileArray = Directory.GetFiles(files);
+            string[] FileArray = Directory.GetFiles(_file);
             List<Set> list = new List<Set>();
             var fileSystem = new FileSystem();
 
@@ -57,7 +63,7 @@ namespace Watcher
             List<ShortProcess> list = action.List();
             List<ShortProcess> sorted = new List<ShortProcess>();
 
-            foreach (var i in Deserialize(_file))
+            foreach (var i in Deserialize())
             {
                 var tmp = list.Where(x => x.Name == i.Name);
                 sorted.AddRange(tmp);
@@ -66,11 +72,11 @@ namespace Watcher
             return sorted;
         }
 
-        public void Start()
+        public void Start(ref bool start)
         {
             List<ShortProcess> list = CheckProceses();
 
-            var track = new Track();
+            var track = new Track(_file);
 
             if (_oldId == null)
             {
@@ -93,9 +99,9 @@ namespace Watcher
                 _oldName = track.AutorestartProc(name,_oldName);
             }
             
-            track.TrackProc(list);
+            //track.TrackProc(list);
             Thread.Sleep(_time);
-            Start();
+            Start(ref start);
         }
 
         private void Check(IEnumerable<int> id, List<ShortProcess> sProc, EventHandler<ProcesesEventArgs> e)

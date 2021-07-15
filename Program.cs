@@ -6,17 +6,16 @@ using ConsoleTables;
 using LibaryCore;
 using Watcher;
 using Setting;
-using System.Configuration;
+
 namespace SupervisorConsole
 {
     internal class Program : ConsoleAppBase
     {
         private ActionsProceses actions = new ActionsProceses();
-        private static string _folder = ConfigurationManager.AppSettings["Folder"];
         static async Task Main(string[] args)
         {
             // target T as ConsoleAppBase.
-            var track = new Track(_folder);
+            var track = new Track();
             track.Autorun();
 
             await Host.CreateDefaultBuilder().RunConsoleAppFrameworkAsync<Program>(args);
@@ -127,8 +126,7 @@ namespace SupervisorConsole
         [Command ("Watch")]
         public void Watch()
         {
-            var watch = new Watch(_folder);
-            bool ifStart = true;
+            Watch watch = new Watch();
             watch.Started += delegate (object sender, ProcesesEventArgs e)
             {
                 var table = new ConsoleTable("Name", "Id");
@@ -155,7 +153,7 @@ namespace SupervisorConsole
                 }
             };
 
-            watch.Start(ref ifStart);
+            watch.Start();
         }
     }
 }

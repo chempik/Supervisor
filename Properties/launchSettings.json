@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SupervisorConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "Watch"
+    }
+  }
+}

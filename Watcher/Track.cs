@@ -9,13 +9,18 @@ namespace Watcher
 {
     public class Track
     {
-        private const string _file = @"XmlFiles";
+        private readonly string _file;
         private ActionsProceses _actions = new ActionsProceses();
+
+        public Track(string folder)
+        {
+            _file = folder;
+        }
 
         private List<Proc> Data()
         {
-            var watch = new Watch();
-            var set = watch.Deserialize(_file);
+            var watch = new Watch(_file);
+            var set = watch.Deserialize();
 
             var proceses = new List<Proc>();
 
@@ -44,7 +49,7 @@ namespace Watcher
         public string[] AutorestartProc (string[] Name, string[] oldName)
         {
             List<string> names = Name.ToList();
-            List<AutorestartProc> list = (List<AutorestartProc>)Data().Where(x => x.GetType() == typeof(AutorestartProc));
+            var list = (List<AutorestartProc>)Data().Where(x => x.GetType() == typeof(AutorestartProc));
             foreach (var i in list)
             {
                 if (oldName.Contains(i.Name) && !Name.Contains(i.Name))
@@ -58,7 +63,7 @@ namespace Watcher
 
         public void TrackProc(List<ShortProcess> SProc)
         {
-            List<TrackProc> list = (List<TrackProc>)Data().Where(x => x.GetType() == typeof(TrackProc));
+            var list = (List<TrackProc>)Data().Where(x => x.GetType() == typeof(TrackProc));
 
             foreach (var i in list)
             {
