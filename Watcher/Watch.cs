@@ -99,7 +99,7 @@ namespace Watcher
                 _oldName = track.AutorestartProc(name,_oldName);
             }
             
-            //track.TrackProc(list);
+            track.TrackProc(list);
             Thread.Sleep(_time);
             Start(ref start);
         }

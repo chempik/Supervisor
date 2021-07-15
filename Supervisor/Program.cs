@@ -15,7 +15,6 @@ namespace SupervisorConsole
         private static string _folder = ConfigurationManager.AppSettings["Folder"];
         static async Task Main(string[] args)
         {
-            // target T as ConsoleAppBase.
             var track = new Track(_folder);
             track.Autorun();
 
