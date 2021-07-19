@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7VWwGQMgwl+nNHGc0Hxg0a9G31A+sXQoCcJD7VNPBzqoFG2onHDJBYGD2Cw8VdeALZifXxY9drRX7CaAtP7V+w==",
+  "dgSpecHash": "lqj7nDzIWAwT96BxujL+xTnzA2/4uMXpCAOsnL4rIYtc3G1dVzQI1I6z1MNYI6aphMJLH7j7210pwi2EDBeAjA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+  "projectFilePath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Viego\\.nuget\\packages\\consoleappframework\\3.3.0\\consoleappframework.3.3.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\consoletables\\2.4.2\\consoletables.2.4.2.nupkg.sha512",

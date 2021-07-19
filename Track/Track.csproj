@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExceptionsLibrary\ExceptionsLibrary.csproj" />
     <ProjectReference Include="..\LibaryCore\LibaryCore.csproj" />
-    <ProjectReference Include="..\Watcher\Watcher.csproj" />
+    <ProjectReference Include="..\Setting\Setting.csproj" />
   </ItemGroup>
 
 </Project>

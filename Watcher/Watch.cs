@@ -76,8 +76,6 @@ namespace Watcher
         {
             List<ShortProcess> list = CheckProceses();
 
-            var track = new Track(_file);
-
             if (_oldId == null)
             {
                 _oldId = list.Select(x => x.Id).ToArray();
@@ -96,10 +94,11 @@ namespace Watcher
                 Check(deleteId, list, Ended);
 
                 _oldId = id;
-                _oldName = track.AutorestartProc(name,_oldName);
+                var autorestart = new AutorestartTrack(_file);
+                _oldName = autorestart.Tracked(name,_oldName);
             }
-            
-            track.TrackProc(list);
+            var numerosity = new NumerosityTrack(_file);
+            numerosity.Traced(list);
             Thread.Sleep(_time);
             Start(ref start);
         }

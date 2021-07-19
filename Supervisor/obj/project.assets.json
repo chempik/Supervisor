@@ -9367,11 +9367,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+      "projectUniqueName": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
       "projectName": "SupervisorConsole",
-      "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+      "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
       "packagesPath": "C:\\Users\\Viego\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\obj\\",
+      "outputPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Viego\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9388,14 +9388,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
-              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\LibaryCore\\LibaryCore.csproj"
             },
-            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Setting\\Setting.csproj": {
-              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Setting\\Setting.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Setting\\Setting.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Setting\\Setting.csproj"
             },
-            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj": {
-              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Watcher\\Watcher.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Watcher\\Watcher.csproj"
             }
           }
         }

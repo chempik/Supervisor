@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using LibaryCore;
+﻿using LibaryCore;
 using Setting;
+using System;
+using System.Collections.Generic;
 
-namespace Watcher
+namespace Track
 {
-    public abstract class Track
+    public class HeadTrack
     {
-        protected string _file;
+        private readonly string _file;
+        private ActionsProceses _actions = new ActionsProceses();
 
-        public Track(string folder)
+        public HeadTrack(string folder)
         {
             _file = folder;
         }
 
-        protected List<Proc> Data()
+        private List<Proc> Data()
         {
             var watch = new Watch(_file);
             var set = watch.Deserialize();
 
             var proceses = new List<Proc>();
 
-           foreach (var i in set)
+            foreach (var i in set)
             {
                 foreach (var j in i.Proceses)
                 {
@@ -31,7 +30,7 @@ namespace Watcher
                     j.Link = i.Link;
                     proceses.Add(j);
                 }
-           }
+            }
 
             return proceses;
         }
