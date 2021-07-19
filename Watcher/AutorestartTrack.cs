@@ -7,27 +7,36 @@ using System.Text;
 
 namespace Watcher
 {
-    public class AutorestartTrack : Track
+    [TrackAtribute("Track")]
+    public class AutorestartTrack : Track, ITrack
     {
-        public AutorestartTrack(string folder) : base(folder)
-        {
-            _file = folder;
-        }
+        private string [] _oldName;
 
-        public string[] Tracked(string[] Name, string[] oldName)
+        public void Traced(List<ShortProcess> SProc, string folder)
         {
-            List<string> names = Name.ToList();
-            var list = (List<AutorestartProc>)Data().Where(x => x.GetType() == typeof(AutorestartProc));
-            var action = new ActionsProceses();
-            foreach (var i in list)
+            var name = SProc.Select(x => x.Name);
+            List<string> names = (List<string>)name;
+            if (_oldName == null)
             {
-                if (oldName.Contains(i.Name) && !Name.Contains(i.Name))
-                {
-                    action.Start(i.Link);
-                    names.Add(i.Name);
-                }
+                _oldName = name.ToArray();
             }
-            return names.ToArray();
+
+            else
+            {
+                var list = (List<AutorestartProc>)Data(folder).Where(x => x.GetType() == typeof(AutorestartProc));
+                var action = new ActionsProceses();
+                
+                foreach (var i in list)
+                {
+                    if (_oldName.Contains(i.Name) && !names.Contains(i.Name))
+                    {
+                        action.Start(i.Link);
+                        names.Add(i.Name);
+                    }
+                }
+
+                _oldName = names.ToArray();
+            }
         }
     }
 }

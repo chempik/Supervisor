@@ -7,17 +7,13 @@ using System.Text;
 
 namespace Watcher
 {
-    public class NumerosityTrack : Track
+    [TrackAtribute("Track")]
+    public class NumerosityTrack : Track, ITrack
     {
         
-        public NumerosityTrack(string folder) : base(folder)
+        public void Traced(List<ShortProcess> SProc, string folder)
         {
-            _file = folder;
-        }
-
-        public void Traced(List<ShortProcess> SProc)
-        {
-            var list = (List<TrackProc>)Data().Where(x => x.GetType() == typeof(TrackProc));
+            var list = (List<TrackProc>)Data(folder).Where(x => x.GetType() == typeof(TrackProc));
             var action = new ActionsProceses();
             foreach (var i in list)
             {

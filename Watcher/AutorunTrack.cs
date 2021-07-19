@@ -8,20 +8,21 @@ using System.Text;
 
 namespace Watcher
 {
-    public class AutorunTrack : Track
+    [TrackAtribute("Track")]
+    public class AutorunTrack : Track, ITrack
     {
-        public AutorunTrack(string folder) : base (folder)
+        private bool _autorun = true;
+        public void Traced(List<ShortProcess> SProc, string folder)
         {
-            _file = folder;
-        }
-
-        public void Tracked()
-        {
-            var list = Data().Where(x => x.GetType() == typeof(AuTorunProc));
-            var action = new ActionsProceses();
-            foreach (var i in list)
+            if (_autorun)
             {
-                action.Start(i.Link);
+                var list = Data(folder).Where(x => x.GetType() == typeof(AuTorunProc));
+                var action = new ActionsProceses();
+                foreach (var i in list)
+                {
+                    action.Start(i.Link);
+                }
+                _autorun = false;
             }
         }
     }

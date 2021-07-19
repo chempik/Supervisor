@@ -9,16 +9,10 @@ namespace Watcher
 {
     public abstract class Track
     {
-        protected string _file;
 
-        public Track(string folder)
+        protected List<Proc> Data(string folder)
         {
-            _file = folder;
-        }
-
-        protected List<Proc> Data()
-        {
-            var watch = new Watch(_file);
+            var watch = new Watch(folder);
             var set = watch.Deserialize();
 
             var proceses = new List<Proc>();

@@ -10,6 +10,7 @@ using Setting;
 using ExceptionsLibrary;
 using System.Diagnostics;
 using System.Management;
+using System.Reflection;
 
 namespace Watcher
 {
@@ -18,9 +19,8 @@ namespace Watcher
         private readonly string  _file;
         private ActionsProceses action = new ActionsProceses();
         private int[] _oldId;
-        private string[] _oldName;
         private int _time = 5000;
-        
+        private List<ITrack> _track;
 
         public event EventHandler<ProcesesEventArgs> Started;
         public event EventHandler<ProcesesEventArgs> Opened;
@@ -42,6 +42,23 @@ namespace Watcher
             ProcesesEventArgs args = new ProcesesEventArgs();
             args.proc = proc;
             return args;
+        }
+
+        private List<ITrack> Validete()
+        {
+            var list = new  List<ITrack>();
+            var tupeList = Assembly.GetExecutingAssembly()
+                           .GetTypes()
+                           .Where(x => x.GetCustomAttribute<TrackAtribute>(true) != null)
+                           .ToList();
+
+            foreach (var i in tupeList)
+            {
+                var exemp = Activator.CreateInstance(i) as ITrack;
+                list.Add(exemp);
+            }
+
+            return list;
         }
 
         internal List<Set> Deserialize()
@@ -76,10 +93,11 @@ namespace Watcher
         {
             List<ShortProcess> list = CheckProceses();
 
+            
             if (_oldId == null)
             {
+                _track = Validete();
                 _oldId = list.Select(x => x.Id).ToArray();
-                _oldName = list.Select(x => x.Name).ToArray();
                 OnProcesesEventArgs(CreateProcesesEventArgs(list), Started);
             }
 
@@ -94,11 +112,11 @@ namespace Watcher
                 Check(deleteId, list, Ended);
 
                 _oldId = id;
-                var autorestart = new AutorestartTrack(_file);
-                _oldName = autorestart.Tracked(name,_oldName);
             }
-            var numerosity = new NumerosityTrack(_file);
-            numerosity.Traced(list);
+            foreach (var i in _track)
+            {
+                i.Traced(list, _file);
+            }
             Thread.Sleep(_time);
             Start(ref start);
         }
