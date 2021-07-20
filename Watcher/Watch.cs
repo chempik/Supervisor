@@ -44,7 +44,7 @@ namespace Watcher
             return args;
         }
 
-        private List<ITrack> Validete()
+        private List<ITrack> Validate()
         {
             var list = new  List<ITrack>();
             var tupeList = Assembly.GetExecutingAssembly()
