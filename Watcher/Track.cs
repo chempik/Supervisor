@@ -7,19 +7,12 @@ using Setting;
 
 namespace Watcher
 {
-    public class Track
+    public abstract class Track
     {
-        private readonly string _file;
-        private ActionsProceses _actions = new ActionsProceses();
 
-        public Track(string folder)
+        protected List<Proc> Data(string folder)
         {
-            _file = folder;
-        }
-
-        private List<Proc> Data()
-        {
-            var watch = new Watch(_file);
+            var watch = new Watch(folder);
             var set = watch.Deserialize();
 
             var proceses = new List<Proc>();
@@ -32,47 +25,9 @@ namespace Watcher
                     j.Link = i.Link;
                     proceses.Add(j);
                 }
-            }
+           }
 
             return proceses;
-        }
-
-        public void Autorun()
-        {
-            var list = Data().Where(x => x.GetType() == typeof(AuTorunProc));
-            foreach (var i in list)
-            {
-                _actions.Start(i.Link);
-            }
-        }
-
-        public string[] AutorestartProc (string[] Name, string[] oldName)
-        {
-            List<string> names = Name.ToList();
-            var list = (List<AutorestartProc>)Data().Where(x => x.GetType() == typeof(AutorestartProc));
-            foreach (var i in list)
-            {
-                if (oldName.Contains(i.Name) && !Name.Contains(i.Name))
-                {
-                    _actions.Start(i.Link);
-                    names.Add(i.Name);
-                }
-            }
-            return names.ToArray();
-        }
-
-        public void TrackProc(List<ShortProcess> SProc)
-        {
-            var list = (List<TrackProc>)Data().Where(x => x.GetType() == typeof(TrackProc));
-
-            foreach (var i in list)
-            {
-                var proces = SProc.Where(x => x.Name == i.Name);
-                while (proces.Count() > i.Track)
-                {
-                        _actions.KillOneProcess(i.Name);
-                }
-            }
         }
     }
 }

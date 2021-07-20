@@ -21,8 +21,6 @@ namespace MyServise
         protected override void OnStart(string[] args)
         {
             Log("Starting");
-            var track = new Track(_folder);
-            track.Autorun();
             ForWatch(ref _start);
             base.OnStart(args);
         }
