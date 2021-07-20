@@ -4,11 +4,10 @@ using System.Text;
 
 namespace Watcher
 {
-    public class TrackAtribute : Attribute
+    public class DeserializeAttribute : Attribute
     {
-        public string Name { get; set; }
-
-        public TrackAtribute(string name)
+        public string Name { get;set; }
+        public DeserializeAttribute(string name)
         {
             Name = name;
         }

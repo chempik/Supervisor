@@ -61,38 +61,11 @@ namespace Watcher
             return list;
         }
 
-        internal List<Set> Deserialize()
-        {
-            string[] FileArray = Directory.GetFiles(_file);
-            List<Set> list = new List<Set>();
-            var fileSystem = new FileSystem();
-
-            foreach (string i in FileArray)
-            {
-                list.Add(fileSystem.Deserialize(i));
-            }
-
-            return list;
-        }
-
-        private List<ShortProcess> CheckProceses()
-        {
-            List<ShortProcess> list = action.List();
-            List<ShortProcess> sorted = new List<ShortProcess>();
-
-            foreach (var i in Deserialize())
-            {
-                var tmp = list.Where(x => x.Name == i.Name);
-                sorted.AddRange(tmp);
-            }
-
-            return sorted;
-        }
 
         public void Start(ref bool start)
         {
-            var xmlWatch = new XmlWatch(_file);
-            List<ShortProcess> list = xmlWatch.CheckProceses();
+            var deserializeSet = new DeserializeSet(_file);
+            List<ShortProcess> list = deserializeSet.CheckProceses();
 
             if (_oldId == null)
             {
