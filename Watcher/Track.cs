@@ -12,8 +12,8 @@ namespace Watcher
 
         protected List<Proc> Data(string folder)
         {
-            var watch = new Watch(folder);
-            var set = watch.Deserialize();
+            var xmlWatch = new XmlWatch(folder);
+            var set = xmlWatch.Deserialize();
 
             var proceses = new List<Proc>();
 

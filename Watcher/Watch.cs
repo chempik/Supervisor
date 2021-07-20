@@ -74,7 +74,7 @@ namespace Watcher
 
             return list;
         }
-        
+
         private List<ShortProcess> CheckProceses()
         {
             List<ShortProcess> list = action.List();
@@ -91,12 +91,12 @@ namespace Watcher
 
         public void Start(ref bool start)
         {
-            List<ShortProcess> list = CheckProceses();
+            var xmlWatch = new XmlWatch(_file);
+            List<ShortProcess> list = xmlWatch.CheckProceses();
 
-            
             if (_oldId == null)
             {
-                _track = Validete();
+                _track = Validate();
                 _oldId = list.Select(x => x.Id).ToArray();
                 OnProcesesEventArgs(CreateProcesesEventArgs(list), Started);
             }
