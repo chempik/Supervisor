@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using LibaryCore;
 using Setting;
+using System.Reflection;
 
 namespace Watcher
 {
@@ -16,12 +17,18 @@ namespace Watcher
         }
         protected List<Proc> Data()
         {
-            var xmlWatch = new XmlDeserialize();
-            var set = xmlWatch.Deserialize(_folder);
+            var watch = Deserialize();
+            List<СompositionProc> сompositions = new List<СompositionProc>();
+
+            foreach (var i in watch)
+            {
+                var tmp = i.Deserialize(_folder);
+                сompositions.AddRange(tmp);
+            }
 
             var proceses = new List<Proc>();
 
-           foreach (var i in set)
+            foreach (var i in сompositions)
             {
                 foreach (var j in i.Proceses)
                 {
@@ -29,9 +36,26 @@ namespace Watcher
                     j.Link = i.Link;
                     proceses.Add(j);
                 }
-           }
+            }
 
-           return proceses;
+            return proceses;
+        }
+
+        private List<IDeserialize> Deserialize()
+        {
+            var list = new List<IDeserialize>();
+            var tupeList = Assembly.GetExecutingAssembly()
+                           .GetTypes()
+                           .Where(x => x.GetCustomAttribute<CustomDeserializeAttribute>(true) != null)
+                           .ToList();
+
+            foreach (var i in tupeList)
+            {
+                var exemp = Activator.CreateInstance(i) as IDeserialize;
+                list.Add(exemp);
+            }
+
+            return list;
         }
     }
 }
