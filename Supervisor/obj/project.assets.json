@@ -9362,19 +9362,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rsemeniak\\.nuget\\packages\\": {}
+    "C:\\Users\\Viego\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+      "projectUniqueName": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
       "projectName": "SupervisorConsole",
-      "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
-      "packagesPath": "C:\\Users\\rsemeniak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\obj\\",
+      "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+      "packagesPath": "C:\\Users\\Viego\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rsemeniak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Viego\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9388,14 +9388,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
-              "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\LibaryCore\\LibaryCore.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj"
             },
-            "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\Setting\\Setting.csproj": {
-              "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\Setting\\Setting.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Setting\\Setting.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Setting\\Setting.csproj"
             },
-            "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\Watcher\\Watcher.csproj": {
-              "projectPath": "C:\\Users\\rsemeniak\\Downloads\\Supervisor (1)\\Supervisor\\Watcher\\Watcher.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj"
             }
           }
         }
@@ -9446,7 +9446,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

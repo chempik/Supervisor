@@ -7,6 +7,6 @@ namespace Watcher
 {
     interface IDeserialize
     {
-        public List<Set> Deserialize(string folder);
+        public List<СompositionProc> Deserialize(string folder);
     }
 }

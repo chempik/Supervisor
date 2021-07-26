@@ -10,14 +10,14 @@ namespace Watcher
     [TrackAtribute("Track")]
     public class NumerosityTrack : Track, ITrack
     {
-        
-        public void Traced(List<ShortProcess> SProc, string folder)
+        public NumerosityTrack() : base() { }
+        public void Traced(List<ShortProcess> shortProces)
         {
-            var list = (List<TrackProc>)Data(folder).Where(x => x.GetType() == typeof(TrackProc));
+            var list = Data().Where(x => x.GetType() == typeof(TrackProc)).Cast<TrackProc>().ToList();
             var action = new ActionsProceses();
             foreach (var i in list)
             {
-                var proces = SProc.Where(x => x.Name == i.Name);
+                var proces = shortProces.Where(x => x.Name == i.Name);
                 while (proces.Count() > i.Track)
                 {
                     action.KillOneProcess(i.Name);

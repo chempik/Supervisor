@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Watcher
 {
-    public class DeserializeAttribute : Attribute
+    public class CustomDeserializeAttribute : Attribute
     {
         public string Name { get;set; }
-        public DeserializeAttribute(string name)
+        public CustomDeserializeAttribute(string name)
         {
             Name = name;
         }

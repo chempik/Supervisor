@@ -8,13 +8,13 @@ using System.Text;
 
 namespace Watcher
 {
-    [DeserializeAttribute("Deserialize")]
+    [CustomDeserializeAttribute("Deserialize")]
     public class XmlDeserialize : IDeserialize
     {
-        public List<Set> Deserialize(string folder)
+        public List<СompositionProc> Deserialize(string folder)
         {
             string[] FileArray = Directory.GetFiles(folder);
-            List<Set> list = new List<Set>();
+            List<СompositionProc> list = new List<СompositionProc>();
             var fileSystem = new FileSystem();
 
             foreach (string i in FileArray)

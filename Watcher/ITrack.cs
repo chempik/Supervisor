@@ -7,6 +7,6 @@ namespace Watcher
 {
     interface ITrack
     {
-        public void Traced(List<ShortProcess> SProc, string folder) { }
+        public void Traced(List<ShortProcess> shortProces) { }
     }
 }

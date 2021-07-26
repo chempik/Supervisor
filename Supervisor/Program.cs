@@ -114,8 +114,8 @@ namespace SupervisorConsole
            // int numerosityInt = Int32.Parse(numerosity);
             FileSystem fileSystem = new FileSystem();
             //fileSystem.Create(actions.Details("msedge"), autorun, numerosityOn, 15);
-            Proc[] procs = new Proc[] {new AuTorunProc(), new TrackProc() };
-            var set = new Set("opera", $@"C:\Users\Ruslan\AppData\Local\Programs\Opera\launcher.exe", procs);
+            Proc[] procs = new Proc[] { new TrackProc() };
+            var set = new СompositionProc("Skype", $@"C:\Program Files\WindowsApps\Microsoft.SkypeApp_15.73.124.0_x86__kzf8qxf38zg5c\Skype\Skype.exe", procs);
 
             fileSystem.Create(set);
         }

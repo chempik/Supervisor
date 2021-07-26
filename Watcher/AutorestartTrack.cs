@@ -12,9 +12,10 @@ namespace Watcher
     {
         private string [] _oldName;
 
-        public void Traced(List<ShortProcess> SProc, string folder)
+        public AutorestartTrack() : base() { }
+        public void Traced(List<ShortProcess> shortProces)
         {
-            var name = SProc.Select(x => x.Name);
+            var name = shortProces.Select(x => x.Name).ToList();
             List<string> names = (List<string>)name;
             if (_oldName == null)
             {
@@ -23,7 +24,7 @@ namespace Watcher
 
             else
             {
-                var list = (List<AutorestartProc>)Data(folder).Where(x => x.GetType() == typeof(AutorestartProc));
+                var list = Data().Where(x => x.GetType() == typeof(AutorestartProc));
                 var action = new ActionsProceses();
                 
                 foreach (var i in list)

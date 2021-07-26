@@ -10,7 +10,7 @@ namespace Watcher
 {
     public class FileSystem : ICreate
     {
-        internal Set Deserialize(string file)
+        internal СompositionProc Deserialize(string file)
         {
             var atters = new XmlAttributes();
             var over = new XmlAttributeOverrides();
@@ -23,17 +23,17 @@ namespace Watcher
                 atters.XmlElements.Add(attr);
             }
 
-            over.Add(typeof(Set), nameof(Set.Proceses), atters);
+            over.Add(typeof(СompositionProc), nameof(СompositionProc.Proceses), atters);
 
-            var s = new XmlSerializer(typeof(Set), over);
+            var s = new XmlSerializer(typeof(СompositionProc), over);
 
             using (FileStream fs = new FileStream(file, FileMode.Open))
             {
-                return (Set)s.Deserialize(fs);
+                return (СompositionProc)s.Deserialize(fs);
             }
         }
 
-        private void Serialize(Set setProc, string file)
+        private void Serialize(СompositionProc setProc, string file)
         {
             var attrs = new XmlAttributes();
             var list = new TypeSet().TypeList;
@@ -46,8 +46,8 @@ namespace Watcher
             }
 
             var attrOver = new XmlAttributeOverrides();
-            attrOver.Add(typeof(Set), nameof(Set.Proceses), attrs);
-            var s = new XmlSerializer(typeof(Set), attrOver);
+            attrOver.Add(typeof(СompositionProc), nameof(СompositionProc.Proceses), attrs);
+            var s = new XmlSerializer(typeof(СompositionProc), attrOver);
 
             using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate))
             {
@@ -55,7 +55,7 @@ namespace Watcher
             }
         }
 
-        public void Create (Set set)
+        public void Create (СompositionProc set)
         {
             string fileName = $@"XmlFiles\{set.Name}.xml";
             Serialize(set, fileName);

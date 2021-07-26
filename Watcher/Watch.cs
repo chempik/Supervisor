@@ -16,8 +16,6 @@ namespace Watcher
 {
     public class Watch : IWatch
     {
-        private readonly string  _file;
-        private ActionsProceses action = new ActionsProceses();
         private int[] _oldId;
         private int _time = 5000;
         private List<ITrack> _track;
@@ -28,7 +26,7 @@ namespace Watcher
 
         public Watch (string folder)
         {
-            _file = folder;
+            Singl.getInstance().Init(folder);
         }
 
         protected virtual void OnProcesesEventArgs (ProcesesEventArgs e, EventHandler<ProcesesEventArgs> occasion)
@@ -64,7 +62,7 @@ namespace Watcher
 
         public void Start(ref bool start)
         {
-            var deserializeSet = new DeserializeSet(_file);
+            var deserializeSet = new DeserializeComposition();
             List<ShortProcess> list = deserializeSet.CheckProceses();
 
             if (_oldId == null)
@@ -88,7 +86,7 @@ namespace Watcher
             }
             foreach (var i in _track)
             {
-                i.Traced(list, _file);
+                i.Traced(list);
             }
             Thread.Sleep(_time);
             Start(ref start);

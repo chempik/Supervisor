@@ -9,11 +9,15 @@ namespace Watcher
 {
     public abstract class Track
     {
-
-        protected List<Proc> Data(string folder)
+        private readonly string _folder;
+        public Track()
+        {
+            _folder = Singl.getInstance().Folder;
+        }
+        protected List<Proc> Data()
         {
             var xmlWatch = new XmlDeserialize();
-            var set = xmlWatch.Deserialize(folder);
+            var set = xmlWatch.Deserialize(_folder);
 
             var proceses = new List<Proc>();
 

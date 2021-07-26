@@ -7,6 +7,6 @@ namespace Watcher
 {
     interface ICreate
     {
-        public void Create(Set set);
+        public void Create(СompositionProc set);
     }
 }

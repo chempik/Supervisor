@@ -7,14 +7,14 @@ using System.Text;
 
 namespace Watcher
 {
-    public  class DeserializeSet
+    public  class DeserializeComposition
     {
         private string _folder;
         private ActionsProceses _action = new ActionsProceses();
 
-        public DeserializeSet(string folder)
+        public DeserializeComposition()
         {
-            _folder = folder;
+            _folder = Singl.getInstance().Folder;
         }
 
         public List<ShortProcess> CheckProceses()
@@ -48,6 +48,7 @@ namespace Watcher
             {
                 var exemp = Activator.CreateInstance(i) as IDeserialize;
                 list.Add(exemp);
+
             }
 
             return list;
