@@ -7,6 +7,6 @@ namespace Watcher
 {
     interface ITrack
     {
-        public void Traced(List<ShortProcess> shortProces) { }
+        public void Traced(List<ShortProcess> shortProces, IConfig config) { }
     }
 }

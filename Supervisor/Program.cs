@@ -7,15 +7,28 @@ using LibaryCore;
 using Watcher;
 using Setting;
 using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace SupervisorConsole
 {
     internal class Program : ConsoleAppBase
     {
+        public Program(Watch watch)
+        {
+            _watch = watch;
+        }
+
+        private Watch _watch;
         private ActionsProceses actions = new ActionsProceses();
         private static string _folder = ConfigurationManager.AppSettings["Folder"];
         static async Task Main(string[] args)
         {
-            await Host.CreateDefaultBuilder().RunConsoleAppFrameworkAsync<Program>(args);
+            var hostBuilder = Host.CreateDefaultBuilder()
+                .ConfigureServices((_, services) =>
+                    services.AddSingleton<IConfig, Config>(Configer)
+                    .AddScoped<Watch>());
+            await hostBuilder.RunConsoleAppFrameworkAsync<Program>(args);
+            
         }
 
         /// <summary>
@@ -23,7 +36,7 @@ namespace SupervisorConsole
         /// </summary>
         /// <param name="link">link to exe file</param>
         [Command("Start")]
-        
+
         public void Start([Option(0)] string link)
         {
             ShortProcess added = actions.Start(link);
@@ -43,7 +56,7 @@ namespace SupervisorConsole
 
         public void Kill([Option(0)] int id)
         {
-           bool inspector = actions.Kill(id);
+            bool inspector = actions.Kill(id);
             if (inspector) Console.WriteLine("Process has been removed");
             else Console.WriteLine("Process not found");
         }
@@ -111,24 +124,22 @@ namespace SupervisorConsole
         [Command("File")]
         public void fileTest()
         {
-           // int numerosityInt = Int32.Parse(numerosity);
             FileSystem fileSystem = new FileSystem();
-            //fileSystem.Create(actions.Details("msedge"), autorun, numerosityOn, 15);
             Proc[] procs = new Proc[] { new TrackProc() };
             var set = new СompositionProc("Skype", $@"C:\Program Files\WindowsApps\Microsoft.SkypeApp_15.73.124.0_x86__kzf8qxf38zg5c\Skype\Skype.exe", procs);
 
             fileSystem.Create(set);
         }
-        
-        [Command ("Watch")]
+
+        [Command("Watch")]
         public void Watch()
         {
-            var watch = new Watch(_folder);
+            var watch = _watch;
             bool ifStart = true;
             watch.Started += delegate (object sender, ProcesesEventArgs e)
             {
                 var table = new ConsoleTable("Name", "Id");
-                for (int i = 0; i< e.proc.Count; i++)
+                for (int i = 0; i < e.proc.Count; i++)
                 {
                     table.AddRow(e.proc[i].Name, e.proc[i].Id);
                 }
@@ -152,6 +163,11 @@ namespace SupervisorConsole
             };
 
             watch.Start(ref ifStart);
+        }
+
+        private static Config Configer(IServiceProvider arg)
+        {
+            return new Config {Folder = _folder };
         }
     }
 }

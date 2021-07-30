@@ -13,12 +13,11 @@ namespace Watcher
     {
         private bool _autorun = true;
 
-        public AutorunTrack() : base() { }
-        public void Traced(List<ShortProcess> shortProces)
+        public void Traced(List<ShortProcess> shortProces, IConfig config)
         {
             if (_autorun)
             {
-                var list = Data().Where(x => x.GetType() == typeof(AuTorunProc));
+                var list = Data(config.Folder).Where(x => x.GetType() == typeof(AuTorunProc));
                 var action = new ActionsProceses();
                 foreach (var i in list)
                 {

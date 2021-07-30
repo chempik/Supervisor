@@ -10,10 +10,9 @@ namespace Watcher
     [TrackAtribute("Track")]
     public class NumerosityTrack : Track, ITrack
     {
-        public NumerosityTrack() : base() { }
-        public void Traced(List<ShortProcess> shortProces)
+        public void Traced(List<ShortProcess> shortProces, IConfig config)
         {
-            var list = Data().Where(x => x.GetType() == typeof(TrackProc)).Cast<TrackProc>().ToList();
+            var list = Data(config.Folder).Where(x => x.GetType() == typeof(TrackProc)).Cast<TrackProc>().ToList();
             var action = new ActionsProceses();
             foreach (var i in list)
             {

@@ -12,9 +12,9 @@ namespace Watcher
         private string _folder;
         private ActionsProceses _action = new ActionsProceses();
 
-        public DeserializeComposition()
+        public DeserializeComposition(string folder)
         {
-            _folder = Singl.getInstance().Folder;
+            _folder = folder;
         }
 
         public List<ShortProcess> CheckProceses()

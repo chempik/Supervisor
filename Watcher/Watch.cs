@@ -19,14 +19,15 @@ namespace Watcher
         private int[] _oldId;
         private int _time = 5000;
         private List<ITrack> _track;
+        public readonly IConfig Config;
 
         public event EventHandler<ProcesesEventArgs> Started;
         public event EventHandler<ProcesesEventArgs> Opened;
         public event EventHandler<ProcesesEventArgs> Ended;
 
-        public Watch (string folder)
+        public Watch (IConfig config)
         {
-            Singl.getInstance().Init(folder);
+            Config = config;
         }
 
         protected virtual void OnProcesesEventArgs (ProcesesEventArgs e, EventHandler<ProcesesEventArgs> occasion)
@@ -62,7 +63,7 @@ namespace Watcher
 
         public void Start(ref bool start)
         {
-            var deserializeSet = new DeserializeComposition();
+            var deserializeSet = new DeserializeComposition(Config.Folder);
             List<ShortProcess> list = deserializeSet.CheckProceses();
 
             if (_oldId == null)
@@ -86,7 +87,7 @@ namespace Watcher
             }
             foreach (var i in _track)
             {
-                i.Traced(list);
+                i.Traced(list,Config);
             }
             Thread.Sleep(_time);
             Start(ref start);

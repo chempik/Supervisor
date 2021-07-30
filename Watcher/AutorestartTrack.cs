@@ -12,8 +12,7 @@ namespace Watcher
     {
         private string [] _oldName;
 
-        public AutorestartTrack() : base() { }
-        public void Traced(List<ShortProcess> shortProces)
+        public void Traced(List<ShortProcess> shortProces, IConfig config)
         {
             var name = shortProces.Select(x => x.Name).ToList();
             List<string> names = (List<string>)name;
@@ -24,7 +23,7 @@ namespace Watcher
 
             else
             {
-                var list = Data().Where(x => x.GetType() == typeof(AutorestartProc));
+                var list = Data(config.Folder).Where(x => x.GetType() == typeof(AutorestartProc));
                 var action = new ActionsProceses();
                 
                 foreach (var i in list)

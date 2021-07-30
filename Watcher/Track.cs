@@ -10,19 +10,14 @@ namespace Watcher
 {
     public abstract class Track
     {
-        private readonly string _folder;
-        public Track()
-        {
-            _folder = Singl.getInstance().Folder;
-        }
-        protected List<Proc> Data()
+        protected List<Proc> Data(string folder)
         {
             var watch = Deserialize();
             List<СompositionProc> сompositions = new List<СompositionProc>();
 
             foreach (var i in watch)
             {
-                var tmp = i.Deserialize(_folder);
+                var tmp = i.Deserialize(folder);
                 сompositions.AddRange(tmp);
             }
 
