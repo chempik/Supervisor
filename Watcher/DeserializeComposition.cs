@@ -4,29 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Watcher.Interfece;
 
 namespace Watcher
 {
-    public  class DeserializeComposition
+    [CompositionAttribute("Deserialize")]
+    public  class DeserializeComposition : IDeserializeComposition
     {
-        private string _folder;
         private ActionsProceses _action = new ActionsProceses();
 
-        public DeserializeComposition(string folder)
-        {
-            _folder = folder;
-        }
-
-        public List<ShortProcess> CheckProceses()
+        public List<ShortProcess> CheckProceses(string folder)
         {
             var DeserializeList = new List<IDeserialize>();
             List<ShortProcess> list = _action.List();
             List<ShortProcess> sorted = new List<ShortProcess>();
-            var deserializeSet = Validate();
+            var ListDeserialize = GetListDeserialize();
 
-            foreach (var i in deserializeSet)
+            foreach (var i in ListDeserialize)
             {
-                foreach (var j in i.Deserialize(_folder))
+                foreach (var j in i.Deserialize(folder))
                 {
                     var tmp = list.Where(x => x.Name == j.Name);
                     sorted.AddRange(tmp);
@@ -36,7 +32,7 @@ namespace Watcher
             return sorted;
         }
 
-        private List<IDeserialize> Validate()
+        private List<IDeserialize> GetListDeserialize()
         {
             var list = new List<IDeserialize>();
             var tupeList = Assembly.GetExecutingAssembly()

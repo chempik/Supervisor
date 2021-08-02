@@ -4,6 +4,7 @@ using System.Threading;
 using LibaryCore;
 using System.Linq;
 using System.Reflection;
+using Watcher.Interfece;
 
 namespace Watcher
 {
@@ -36,15 +37,15 @@ namespace Watcher
             return args;
         }
 
-        private List<ITrack> Validate()
+        private List<ITrack> GetRuleList()
         {
-            var list = new  List<ITrack>();
-            var tupeList = Assembly.GetExecutingAssembly()
+            var list = new List<ITrack>();
+            var typeList = Assembly.GetExecutingAssembly()
                            .GetTypes()
                            .Where(x => x.GetCustomAttribute<TrackAtribute>(true) != null)
                            .ToList();
 
-            foreach (var i in tupeList)
+            foreach (var i in typeList)
             {
                 var exemp = Activator.CreateInstance(i) as ITrack;
                 list.Add(exemp);
@@ -52,16 +53,28 @@ namespace Watcher
 
             return list;
         }
-
+        private List<ShortProcess> GetDeserialize()
+        {
+            var list = new List<ShortProcess>();
+            var typeList = Assembly.GetExecutingAssembly()
+                           .GetTypes()
+                           .Where(x => x.GetCustomAttribute<CompositionAttribute> (true) != null)
+                           .ToList();
+            foreach (var i in typeList)
+            {
+                var exemp = Activator.CreateInstance(i) as IDeserializeComposition;
+                list.AddRange(exemp.CheckProceses(Config.Folder));
+            }
+            return list;
+        }
 
         public void Start(ref bool start)
         {
-            var deserializeComposition = new DeserializeComposition(Config.Folder);
-            List<ShortProcess> list = deserializeComposition.CheckProceses();
+            List<ShortProcess> list = GetDeserialize();
 
             if (_oldId == null)
             {
-                _track = Validate();
+                _track = GetRuleList();
                 _oldId = list.Select(x => x.Id).ToArray();
                 OnProcesesEventArgs(CreateProcesesEventArgs(list), Started);
             }
