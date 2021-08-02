@@ -13,9 +13,9 @@ namespace SupervisorConsole
 {
     internal class Program : ConsoleAppBase
     {
-        public Program(Watch watch)
+        public Program(IWatch watch)
         {
-            _watch = watch;
+            _watch = (Watch)watch;
         }
 
         private Watch _watch;
@@ -26,7 +26,7 @@ namespace SupervisorConsole
             var hostBuilder = Host.CreateDefaultBuilder()
                 .ConfigureServices((_, services) =>
                     services.AddSingleton<IConfig, Config>(Configer)
-                    .AddScoped<Watch>());
+                    .AddScoped<IWatch, Watch>());
             await hostBuilder.RunConsoleAppFrameworkAsync<Program>(args);
             
         }

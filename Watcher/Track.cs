@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Watcher
 {
-    public abstract class Track
+    public abstract class Track : ITrack
     {
         protected List<Proc> Data(string folder)
         {

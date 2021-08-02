@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.IO;
 using LibaryCore;
 using System.Linq;
-using Setting;
-using ExceptionsLibrary;
-using System.Diagnostics;
-using System.Management;
 using System.Reflection;
 
 namespace Watcher
@@ -63,8 +56,8 @@ namespace Watcher
 
         public void Start(ref bool start)
         {
-            var deserializeSet = new DeserializeComposition(Config.Folder);
-            List<ShortProcess> list = deserializeSet.CheckProceses();
+            var deserializeComposition = new DeserializeComposition(Config.Folder);
+            List<ShortProcess> list = deserializeComposition.CheckProceses();
 
             if (_oldId == null)
             {
