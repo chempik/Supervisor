@@ -57,11 +57,11 @@ namespace LibaryCore
             }
             catch (ObjectDisposedException ex )
             {
-                throw new ExeNotFoundException("The process object has already been disposed.", ex);
+                throw new DeletedObjectException("The process object has already been disposed.", ex);
             }
             catch (Win32Exception ex)
             {
-                throw new ExeNotFoundException("The associated process could not be terminated.", ex);
+                throw new OpeningFileException("The associated process could not be terminated.", ex);
             }
         }
         /// <summary>
@@ -80,7 +80,7 @@ namespace LibaryCore
             }
             catch (Win32Exception ex)
             {
-                throw new IdNotFoundException("The associated process could not be terminated.", ex);
+                throw new OpeningFileException("The associated process could not be terminated.", ex);
             }
             catch (NotSupportedException ex)
             {
@@ -88,11 +88,11 @@ namespace LibaryCore
             }
             catch (InvalidOperationException ex)
             {
-                throw new IdNotFoundException("There is no process associated with this Process object.", ex);
+                throw new DeletedObjectException("There is no process associated with this Process object.", ex);
             }
             catch (AggregateException ex)
             {
-                throw new IdNotFoundException("error in one of the threads, the system interrupts the execution of all threads", ex);
+                throw new ProcessCannotBeCompletedException("error in one of the threads, the system interrupts the execution of all threads", ex);
             }
         }
 
@@ -112,7 +112,7 @@ namespace LibaryCore
             }
             catch (Win32Exception ex)
             {
-                throw new IdNotFoundException("The associated process could not be terminated.", ex);
+                throw new OpeningFileException("The associated process could not be terminated.", ex);
             }
             catch (NotSupportedException ex)
             {
@@ -120,11 +120,11 @@ namespace LibaryCore
             }
             catch (InvalidOperationException ex)
             {
-                throw new IdNotFoundException("There is no process associated with this Process object.", ex);
+                throw new DeletedObjectException("There is no process associated with this Process object.", ex);
             }
             catch (AggregateException ex)
             {
-                throw new IdNotFoundException("error in one of the threads, the system interrupts the execution of all threads", ex);
+                throw new ProcessCannotBeCompletedException("error in one of the threads, the system interrupts the execution of all threads", ex);
             }
         }
         /// <summary>
@@ -176,7 +176,7 @@ namespace LibaryCore
             }
             catch (Win32Exception ex)
             {
-                throw new IdNotFoundException("The associated process could not be terminated.", ex) ;
+                throw new OpeningFileException("The associated process could not be terminated.", ex);
             }
             catch (NotSupportedException ex)
             {
@@ -184,11 +184,11 @@ namespace LibaryCore
             }
             catch (InvalidOperationException ex)
             {
-                throw new IdNotFoundException("There is no process associated with this Process object.", ex);
+                throw new DeletedObjectException("There is no process associated with this Process object.", ex);
             }
             catch (AggregateException ex)
             {
-                throw new IdNotFoundException("error in one of the threads, the system interrupts the execution of all threads", ex);
+                throw new ProcessCannotBeCompletedException("error in one of the threads, the system interrupts the execution of all threads", ex);
             }
         }
     }
