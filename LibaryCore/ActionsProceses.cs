@@ -84,7 +84,7 @@ namespace LibaryCore
             }
             catch (NotSupportedException ex)
             {
-                throw new IdNotFoundException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
+                throw new ProcessCannotBeClosedOnRemoteServerException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
             }
             catch (InvalidOperationException ex)
             {
@@ -116,7 +116,7 @@ namespace LibaryCore
             }
             catch (NotSupportedException ex)
             {
-                throw new IdNotFoundException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
+                throw new ProcessCannotBeClosedOnRemoteServerException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
             }
             catch (InvalidOperationException ex)
             {
@@ -180,7 +180,7 @@ namespace LibaryCore
             }
             catch (NotSupportedException ex)
             {
-                throw new IdNotFoundException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
+                throw new ProcessCannotBeClosedOnRemoteServerException("You are attempting to call Kill() for a process that is running on a remote computer.", ex);
             }
             catch (InvalidOperationException ex)
             {
