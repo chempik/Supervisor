@@ -5,14 +5,19 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Watcher.Interfece;
+using System.IO.Abstractions;
 
 namespace Watcher
 {
     [CompositionAttribute("Deserialize")]
     public  class DeserializeComposition : IDeserializeComposition
     {
+        private IFileSystem _fileSystem;
         private ActionsProceses _action = new ActionsProceses();
-
+        public DeserializeComposition(IFileSystem fileSystem)
+        {
+            _fileSystem = fileSystem;
+        }
         public List<ShortProcess> CheckProceses(string folder)
         {
             var DeserializeList = new List<IDeserialize>();
@@ -42,7 +47,7 @@ namespace Watcher
 
             foreach (var i in tupeList)
             {
-                var exemp = Activator.CreateInstance(i) as IDeserialize;
+                var exemp = Activator.CreateInstance(i,_fileSystem) as IDeserialize;
                 list.Add(exemp);
 
             }

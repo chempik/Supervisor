@@ -2,6 +2,7 @@
 using Setting;
 using System;
 using System.Collections.Generic;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 
@@ -10,6 +11,8 @@ namespace Watcher
     [TrackAtribute("Track")]
     public class AutorestartTrack : Track, ITrack
     {
+        public AutorestartTrack(IFileSystem fileSystem) : base(fileSystem) { }
+
         private string [] _oldName;
 
         public void Traced(List<ShortProcess> shortProces, IConfig config)

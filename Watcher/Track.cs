@@ -5,11 +5,17 @@ using System.Linq;
 using LibaryCore;
 using Setting;
 using System.Reflection;
+using System.IO.Abstractions;
 
 namespace Watcher
 {
     public abstract class Track : ITrack
     {
+        protected IFileSystem _fileSystem;
+        public Track(IFileSystem fileSystem)
+        {
+            _fileSystem = fileSystem;
+        }
         protected List<Proc> Data(string folder)
         {
             var watch = Deserialize();
@@ -46,7 +52,7 @@ namespace Watcher
 
             foreach (var i in tupeList)
             {
-                var exemp = Activator.CreateInstance(i) as IDeserialize;
+                var exemp = Activator.CreateInstance(i, _fileSystem) as IDeserialize;
                 list.Add(exemp);
             }
 

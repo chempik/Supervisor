@@ -8,6 +8,8 @@ using Watcher;
 using Setting;
 using System.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Watcher.Interfece;
+using System.IO.Abstractions;
 
 namespace SupervisorConsole
 {
@@ -26,7 +28,9 @@ namespace SupervisorConsole
             var hostBuilder = Host.CreateDefaultBuilder()
                 .ConfigureServices((_, services) =>
                     services.AddSingleton<IConfig, Config>(Configer)
-                    .AddScoped<IWatch, Watch>());
+                    .AddScoped<IWatch, Watch>()
+                    .AddSingleton<IDeserializeComposition,DeserializeComposition>()
+                    .AddSingleton<IFileSystem,System.IO.Abstractions.FileSystem>());
             await hostBuilder.RunConsoleAppFrameworkAsync<Program>(args);
             
         }
@@ -124,7 +128,7 @@ namespace SupervisorConsole
         [Command("File")]
         public void fileTest()
         {
-            FileSystem fileSystem = new FileSystem();
+            var fileSystem = new Watcher.FileSystem();
             Proc[] procs = new Proc[] { new TrackProc() };
             var set = new СompositionProc("Skype", $@"C:\Program Files\WindowsApps\Microsoft.SkypeApp_15.73.124.0_x86__kzf8qxf38zg5c\Skype\Skype.exe", procs);
 

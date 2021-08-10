@@ -1493,6 +1493,18 @@
           "ref/netstandard1.5/System.IO.dll": {}
         }
       },
+      "System.IO.Abstractions/13.2.43": {
+        "type": "package",
+        "dependencies": {
+          "System.IO.FileSystem.AccessControl": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/System.IO.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.IO.Abstractions.dll": {}
+        }
+      },
       "System.IO.Compression/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2797,6 +2809,7 @@
           "LibaryCore": "1.0.0",
           "Setting": "1.0.0",
           "System.Configuration.ConfigurationManager": "5.0.0",
+          "System.IO.Abstractions": "13.2.43",
           "System.Management": "5.0.0"
         },
         "compile": {
@@ -5574,6 +5587,22 @@
         "ref/xamarinwatchos10/_._",
         "system.io.4.3.0.nupkg.sha512",
         "system.io.nuspec"
+      ]
+    },
+    "System.IO.Abstractions/13.2.43": {
+      "sha512": "zLg00Lon8k0ao7BmkkELKoXnNDhf/c+PKtz2QM2zBwzvqt4IVKe6/DIjZGav77O9/aBpmEkp9yWdCWbkq4yhFg==",
+      "type": "package",
+      "path": "system.io.abstractions/13.2.43",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon_256x256.png",
+        "lib/net461/System.IO.Abstractions.dll",
+        "lib/net5.0/System.IO.Abstractions.dll",
+        "lib/netstandard2.0/System.IO.Abstractions.dll",
+        "lib/netstandard2.1/System.IO.Abstractions.dll",
+        "system.io.abstractions.13.2.43.nupkg.sha512",
+        "system.io.abstractions.nuspec"
       ]
     },
     "System.IO.Compression/4.3.0": {
@@ -9367,11 +9396,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+      "projectUniqueName": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
       "projectName": "SupervisorConsole",
-      "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+      "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
       "packagesPath": "C:\\Users\\Viego\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\obj\\",
+      "outputPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Viego\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9388,14 +9417,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
-              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\LibaryCore\\LibaryCore.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\LibaryCore\\LibaryCore.csproj"
             },
-            "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Setting\\Setting.csproj": {
-              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Setting\\Setting.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Setting\\Setting.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Setting\\Setting.csproj"
             },
-            "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Watcher\\Watcher.csproj": {
-              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Watcher\\Watcher.csproj"
+            "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj": {
+              "projectPath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Watcher\\Watcher.csproj"
             }
           }
         }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Watcher
 {
-    interface IDeserialize
+    public interface IDeserialize
     {
         public List<СompositionProc> Deserialize(string folder);
     }

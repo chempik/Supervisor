@@ -5,6 +5,7 @@ using LibaryCore;
 using System.Linq;
 using System.Reflection;
 using Watcher.Interfece;
+using System.IO.Abstractions;
 
 namespace Watcher
 {
@@ -13,15 +14,19 @@ namespace Watcher
         private int[] _oldId;
         private int _time = 5000;
         private List<ITrack> _track;
-        public readonly IConfig Config;
+        private IDeserializeComposition _deserializeComposition;
+        private IFileSystem _fileSystem;
+        internal readonly IConfig Config;
 
         public event EventHandler<ProcesesEventArgs> Started;
         public event EventHandler<ProcesesEventArgs> Opened;
         public event EventHandler<ProcesesEventArgs> Ended;
 
-        public Watch (IConfig config)
+        public Watch (IConfig config, IDeserializeComposition deserializeComposition, IFileSystem fileSystem)
         {
             Config = config;
+            _deserializeComposition = deserializeComposition;
+            _fileSystem = fileSystem;
         }
 
         protected virtual void OnProcesesEventArgs (ProcesesEventArgs e, EventHandler<ProcesesEventArgs> occasion)
@@ -47,13 +52,19 @@ namespace Watcher
 
             foreach (var i in typeList)
             {
-                var exemp = Activator.CreateInstance(i) as ITrack;
+                var exemp = Activator.CreateInstance(i, _fileSystem) as ITrack;
                 list.Add(exemp);
             }
 
             return list;
         }
         private List<ShortProcess> GetDeserialize()
+        {
+            var list = new List<ShortProcess>();
+            list.AddRange(_deserializeComposition.CheckProceses(Config.Folder));
+            return list;
+        }
+     /*   private List<ShortProcess> GetDeserialize()
         {
             var list = new List<ShortProcess>();
             var typeList = Assembly.GetExecutingAssembly()
@@ -67,7 +78,7 @@ namespace Watcher
             }
             return list;
         }
-
+     */
         public void Start(ref bool start)
         {
             List<ShortProcess> list = GetDeserialize();
