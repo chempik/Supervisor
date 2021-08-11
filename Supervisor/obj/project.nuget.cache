@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+1g2k2XzPeaP4pUoSuLUIVvBp+5WBiaM8XjWTFmpY0sVJ9NqccputxQKFqt/BMvS9T3kmbMn0E4ppKUyPN5RZA==",
+  "dgSpecHash": "+JGuLPfJZyYh0UXxWqMT72pxZGQtC+mMyhN5ZXZqCwoNllCArhuEgSFxDoe5btW3EPWXYAQQm1ayTsEXoM58AA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Viego\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\consoleappframework\\3.3.0\\consoleappframework.3.3.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\consoletables\\2.4.2\\consoletables.2.4.2.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\3.0.0\\microsoft.aspnetcore.connections.abstractions.3.0.0.nupkg.sha512",
@@ -46,6 +47,7 @@
     "C:\\Users\\Viego\\.nuget\\packages\\microsoft.win32.registry.accesscontrol\\5.0.0\\microsoft.win32.registry.accesscontrol.5.0.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\microsoft.windows.compatibility\\5.0.2\\microsoft.windows.compatibility.5.0.2.nupkg.sha512",
+    "C:\\Users\\Viego\\.nuget\\packages\\moq\\4.16.1\\moq.4.16.1.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\newtonsoft.json\\10.0.3\\newtonsoft.json.10.0.3.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
@@ -97,6 +99,7 @@
     "C:\\Users\\Viego\\.nuget\\packages\\system.diagnostics.eventlog\\5.0.1\\system.diagnostics.eventlog.5.0.1.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\system.diagnostics.performancecounter\\5.0.1\\system.diagnostics.performancecounter.5.0.1.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
+    "C:\\Users\\Viego\\.nuget\\packages\\system.diagnostics.tracesource\\4.3.0\\system.diagnostics.tracesource.4.3.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\system.directoryservices\\5.0.0\\system.directoryservices.5.0.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\system.directoryservices.accountmanagement\\5.0.0\\system.directoryservices.accountmanagement.5.0.0.nupkg.sha512",

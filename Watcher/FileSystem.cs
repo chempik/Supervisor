@@ -6,10 +6,17 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using LibaryCore;
 using Setting;
+using System.IO.Abstractions;
 namespace Watcher
 {
     public class FileSystem : ICreate
     {
+        private IFileSystem _system;
+        public FileSystem(IFileSystem file)
+        {
+            _system = file;
+        }
+
         internal СompositionProc Deserialize(string file)
         {
             var atters = new XmlAttributes();
@@ -29,6 +36,7 @@ namespace Watcher
 
             using (FileStream fs = new FileStream(file, FileMode.Open))
             {
+                
                 return (СompositionProc)s.Deserialize(fs);
             }
         }

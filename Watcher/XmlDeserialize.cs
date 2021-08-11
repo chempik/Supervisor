@@ -12,16 +12,16 @@ namespace Watcher
     [CustomDeserializeAttribute("Deserialize")]
     public class XmlDeserialize : IDeserialize
     {
-        public IFileSystem FileSystem;
+        public IFileSystem _fileSystem;
         public XmlDeserialize(IFileSystem fileSystem)
         {
-            FileSystem = fileSystem;
+            _fileSystem = fileSystem;
         }
         public List<СompositionProc> Deserialize(string folder)
         {
-            string[] FileArray = FileSystem.Directory.GetFiles(folder);
+            string[] FileArray = _fileSystem.Directory.GetFiles(folder);
             List<СompositionProc> list = new List<СompositionProc>();
-            var fileSystem = new FileSystem();
+            var fileSystem = new FileSystem(_fileSystem);
 
             foreach (string i in FileArray)
             {

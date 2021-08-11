@@ -125,16 +125,6 @@ namespace SupervisorConsole
             table.Write();
         }
 
-        [Command("File")]
-        public void fileTest()
-        {
-            var fileSystem = new Watcher.FileSystem();
-            Proc[] procs = new Proc[] { new TrackProc() };
-            var set = new СompositionProc("Skype", $@"C:\Program Files\WindowsApps\Microsoft.SkypeApp_15.73.124.0_x86__kzf8qxf38zg5c\Skype\Skype.exe", procs);
-
-            fileSystem.Create(set);
-        }
-
         [Command("Watch")]
         public void Watch()
         {

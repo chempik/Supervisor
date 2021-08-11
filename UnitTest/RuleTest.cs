@@ -5,38 +5,35 @@ using System.IO.Abstractions;
 using System.Collections.Generic;
 using System.IO.Abstractions.TestingHelpers;
 using LibaryCore;
+using Moq;
+using System.IO;
 
 namespace UnitTest
 {
     public class RuleTest
     {
-        // ìîê íà ä³ð³êòîð³.
         [Fact]
         public void Test1()
         {
             var config = new Config();
-            string directoryName = "MyFolder";
+            string directoryName = @"C:\Target";
 
-            //var mockDirectory = new MockDirectory();
-
-            var mockFileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
-            {
-                { @"c:\myfile.xml", new MockFileData(@"
+            var newMockFileSystem = new MockFileSystem();
+            newMockFileSystem.AddDirectory(@"C:\Target");
+            newMockFileSystem.AddFile(@"C:\Target\msedge.xml", new MockFileData(@"
                 <?xml version=""1.0""?>
                 <ÑompositionProc xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
                   <Name>msedge</Name>
                   <Link> C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe </ Link >
-                 < AutorunTrack >
-                   < Track > true </ Track >
-                 </ AutorunTrack >
-                </ ÑompositionProc > ") },
-            });
+                 <AuTorunProc>
+                   < Autorun > true </ Autorun >
+                 </ AuTorunProc >
+                </ ÑompositionProc > "));
 
-            var directoryInfo = new MockDirectoryInfo(mockFileSystem, directoryName);
             config.Folder = directoryName;
-            var autorun = new AutorunTrack(mockFileSystem);
+            var autorun = new AutorunTrack(newMockFileSystem);
+            // var cut = new MockFileStream(newMockFileSystem, directoryName, FileMode.Open);
             autorun.Traced(new List<ShortProcess>(), config);
-            var list = new List<ShortProcess>();
 
         }
     }
