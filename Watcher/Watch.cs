@@ -84,7 +84,7 @@ namespace Watcher
         /// <summary>
         /// after you have signed up for the events, must run this method to get started
         /// </summary>
-        /// <param name="token"></param>
+        /// <param name="token">to stop the process</param>
         public void Start(CancellationToken token)
         {
             List<ShortProcess> list = GetDeserialize();
