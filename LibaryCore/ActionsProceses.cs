@@ -165,6 +165,11 @@ namespace LibaryCore
             return list;
         }
 
+        /// <summary>
+        /// kills only one process, not a branch of processes
+        /// </summary>
+        /// <param name="nameProceses"></param>
+        /// <returns>return true if proceses has benn killed</returns>
         public bool KillOneProcess(string nameProceses)
         {
             Process[] Proc = Process.GetProcesses();

@@ -9,6 +9,9 @@ using System.IO.Abstractions;
 
 namespace Watcher
 {
+    /// <summary>
+    ///class is responsible for running the wotcher, you must first subscribe to events, and then make come method Start()
+    /// </summary>
     public class Watch : IWatch
     {
         private int[] _oldId;
@@ -19,8 +22,19 @@ namespace Watcher
         private IActionsProceses _actionsProceses;
         internal readonly IConfig Config;
 
+        /// <summary>
+        ///wotcher started work
+        /// </summary>
         public event EventHandler<ProcesesEventArgs> Started;
+
+        /// <summary>
+        /// a new trackable process has opened
+        /// </summary>
         public event EventHandler<ProcesesEventArgs> Opened;
+
+        /// <summary>
+        /// a new trackable process has close
+        /// </summary>
         public event EventHandler<ProcesesEventArgs> Ended;
 
         public Watch (IConfig config, IDeserializeComposition deserializeComposition, IFileSystem fileSystem, IActionsProceses actionsProceses)
@@ -67,7 +81,11 @@ namespace Watcher
             return list;
         }
 
-        public void Start(ref bool start)
+        /// <summary>
+        /// after you have signed up for the events, must run this method to get started
+        /// </summary>
+        /// <param name="token"></param>
+        public void Start(CancellationToken token)
         {
             List<ShortProcess> list = GetDeserialize();
 
@@ -95,7 +113,7 @@ namespace Watcher
                 i.Traced(list,Config);
             }
             Thread.Sleep(_time);
-            Start(ref start);
+            if (!token.IsCancellationRequested) Start(token);
         }
 
         private void Check(IEnumerable<int> id, List<ShortProcess> sProc, EventHandler<ProcesesEventArgs> e)

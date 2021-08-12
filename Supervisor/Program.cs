@@ -10,6 +10,7 @@ using System.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Watcher.Interfece;
 using System.IO.Abstractions;
+using System.Threading;
 
 namespace SupervisorConsole
 {
@@ -130,7 +131,8 @@ namespace SupervisorConsole
         public void Watch()
         {
             var watch = _watch;
-            bool ifStart = true;
+            var cancelTokenSource = new CancellationTokenSource();
+            var cancelToken = cancelTokenSource.Token;
             watch.Started += delegate (object sender, ProcesesEventArgs e)
             {
                 var table = new ConsoleTable("Name", "Id");
@@ -157,7 +159,7 @@ namespace SupervisorConsole
                 }
             };
 
-            watch.Start(ref ifStart);
+            watch.Start(cancelToken);
         }
 
         private static Config Configer(IServiceProvider arg)
