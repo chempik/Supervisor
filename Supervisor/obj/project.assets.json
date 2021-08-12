@@ -49,6 +49,18 @@
           "lib/netcoreapp3.1/ConsoleTables.dll": {}
         }
       },
+      "FakeItEasy/7.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Castle.Core": "4.3.1"
+        },
+        "compile": {
+          "lib/netstandard2.1/FakeItEasy.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/FakeItEasy.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Connections.Abstractions/3.0.0": {
         "type": "package",
         "dependencies": {
@@ -2939,6 +2951,26 @@
         "lib/netcoreapp3.1/ConsoleTables.pdb",
         "lib/netstandard1.3/ConsoleTables.dll",
         "lib/netstandard1.3/ConsoleTables.pdb"
+      ]
+    },
+    "FakeItEasy/7.1.0": {
+      "sha512": "xn2KC8v1mNpYtN0qiEIuvWnFY7MPzx3INf//+BvJ+banzVSpyGdc58cuQMLOQjNlALHNDTcnuOuJrGtOcN1Gwg==",
+      "type": "package",
+      "path": "fakeiteasy/7.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fakeiteasy.7.1.0.nupkg.sha512",
+        "fakeiteasy.nuspec",
+        "images/FakeItEasy.png",
+        "lib/net45/FakeItEasy.dll",
+        "lib/net45/FakeItEasy.xml",
+        "lib/net5.0/FakeItEasy.dll",
+        "lib/net5.0/FakeItEasy.xml",
+        "lib/netstandard2.0/FakeItEasy.dll",
+        "lib/netstandard2.0/FakeItEasy.xml",
+        "lib/netstandard2.1/FakeItEasy.dll",
+        "lib/netstandard2.1/FakeItEasy.xml"
       ]
     },
     "Microsoft.AspNetCore.Connections.Abstractions/3.0.0": {
@@ -9527,6 +9559,7 @@
     ".NETCoreApp,Version=v3.1": [
       "ConsoleAppFramework >= 3.3.0",
       "ConsoleTables >= 2.4.2",
+      "FakeItEasy >= 7.1.0",
       "LibaryCore >= 1.0.0",
       "Microsoft.Orleans.Core >= 3.4.2",
       "Microsoft.Windows.Compatibility >= 5.0.2",
@@ -9592,6 +9625,10 @@
           "ConsoleTables": {
             "target": "Package",
             "version": "[2.4.2, )"
+          },
+          "FakeItEasy": {
+            "target": "Package",
+            "version": "[7.1.0, )"
           },
           "Microsoft.Orleans.Core": {
             "target": "Package",

@@ -13,7 +13,7 @@ namespace LibaryCore
     /// <summary>
     /// a class that provides access to work with processes
     /// </summary>
-    public class ActionsProceses
+    public class ActionsProceses : IActionsProceses
     {
         private ShortProcess CreateShortProcess(Process process)
         {

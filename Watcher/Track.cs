@@ -12,9 +12,11 @@ namespace Watcher
     public abstract class Track : ITrack
     {
         protected IFileSystem _fileSystem;
-        public Track(IFileSystem fileSystem)
+        protected IActionsProceses _actionsProceses;
+        public Track(IFileSystem fileSystem, IActionsProceses actionsProceses)
         {
             _fileSystem = fileSystem;
+            _actionsProceses = actionsProceses;
         }
         protected List<Proc> Data(string folder)
         {

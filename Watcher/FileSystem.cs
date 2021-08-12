@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using LibaryCore;
 using Setting;
 using System.IO.Abstractions;
+
 namespace Watcher
 {
     public class FileSystem : ICreate
@@ -34,9 +35,8 @@ namespace Watcher
 
             var s = new XmlSerializer(typeof(СompositionProc), over);
 
-            using (FileStream fs = new FileStream(file, FileMode.Open))
+            using (Stream fs = _system.File.Open(file, FileMode.Open))
             {
-                
                 return (СompositionProc)s.Deserialize(fs);
             }
         }

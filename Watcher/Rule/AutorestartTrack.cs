@@ -11,7 +11,7 @@ namespace Watcher
     [TrackAtribute("Track")]
     public class AutorestartTrack : Track, ITrack
     {
-        public AutorestartTrack(IFileSystem fileSystem) : base(fileSystem) { }
+        public AutorestartTrack(IFileSystem fileSystem, IActionsProceses actionsProceses ) : base(fileSystem, actionsProceses) { }
 
         private string [] _oldName;
 
@@ -27,13 +27,12 @@ namespace Watcher
             else
             {
                 var list = Data(config.Folder).Where(x => x.GetType() == typeof(AutorestartProc));
-                var action = new ActionsProceses();
                 
                 foreach (var i in list)
                 {
                     if (_oldName.Contains(i.Name) && !names.Contains(i.Name))
                     {
-                        action.Start(i.Link);
+                        _actionsProceses.Start(i.Link);
                         names.Add(i.Name);
                     }
                 }

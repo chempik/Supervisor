@@ -30,7 +30,8 @@ namespace SupervisorConsole
                     services.AddSingleton<IConfig, Config>(Configer)
                     .AddScoped<IWatch, Watch>()
                     .AddSingleton<IDeserializeComposition,DeserializeComposition>()
-                    .AddSingleton<IFileSystem,System.IO.Abstractions.FileSystem>());
+                    .AddSingleton<IFileSystem,System.IO.Abstractions.FileSystem>()
+                    .AddSingleton<IActionsProceses, ActionsProceses>());
             await hostBuilder.RunConsoleAppFrameworkAsync<Program>(args);
             
         }

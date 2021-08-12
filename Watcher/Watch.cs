@@ -16,17 +16,19 @@ namespace Watcher
         private List<ITrack> _track;
         private IDeserializeComposition _deserializeComposition;
         private IFileSystem _fileSystem;
+        private IActionsProceses _actionsProceses;
         internal readonly IConfig Config;
 
         public event EventHandler<ProcesesEventArgs> Started;
         public event EventHandler<ProcesesEventArgs> Opened;
         public event EventHandler<ProcesesEventArgs> Ended;
 
-        public Watch (IConfig config, IDeserializeComposition deserializeComposition, IFileSystem fileSystem)
+        public Watch (IConfig config, IDeserializeComposition deserializeComposition, IFileSystem fileSystem, IActionsProceses actionsProceses)
         {
             Config = config;
             _deserializeComposition = deserializeComposition;
             _fileSystem = fileSystem;
+            _actionsProceses = actionsProceses;
         }
 
         protected virtual void OnProcesesEventArgs (ProcesesEventArgs e, EventHandler<ProcesesEventArgs> occasion)
@@ -52,7 +54,7 @@ namespace Watcher
 
             foreach (var i in typeList)
             {
-                var exemp = Activator.CreateInstance(i, _fileSystem) as ITrack;
+                var exemp = Activator.CreateInstance(i, _fileSystem, _actionsProceses) as ITrack;
                 list.Add(exemp);
             }
 
@@ -64,21 +66,7 @@ namespace Watcher
             list.AddRange(_deserializeComposition.CheckProceses(Config.Folder));
             return list;
         }
-     /*   private List<ShortProcess> GetDeserialize()
-        {
-            var list = new List<ShortProcess>();
-            var typeList = Assembly.GetExecutingAssembly()
-                           .GetTypes()
-                           .Where(x => x.GetCustomAttribute<CompositionAttribute> (true) != null)
-                           .ToList();
-            foreach (var i in typeList)
-            {
-                var exemp = Activator.CreateInstance(i) as IDeserializeComposition;
-                list.AddRange(exemp.CheckProceses(Config.Folder));
-            }
-            return list;
-        }
-     */
+
         public void Start(ref bool start)
         {
             List<ShortProcess> list = GetDeserialize();

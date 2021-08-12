@@ -12,7 +12,7 @@ namespace Watcher
     [TrackAtribute("Track")]
     public class AutorunTrack : Track, ITrack
     {
-        public AutorunTrack(IFileSystem fileSystem) : base(fileSystem) { }
+        public AutorunTrack(IFileSystem fileSystem, IActionsProceses actionsProceses) : base(fileSystem, actionsProceses) { }
         private bool _autorun = true;
 
         public void Traced(List<ShortProcess> shortProces, IConfig config)
@@ -20,10 +20,10 @@ namespace Watcher
             if (_autorun)
             {
                 var list = Data(config.Folder).Where(x => x.GetType() == typeof(AuTorunProc));
-                var action = new ActionsProceses();
+
                 foreach (var i in list)
                 {
-                    action.Start(i.Link);
+                    _actionsProceses.Start(i.Link);
                 }
                 _autorun = false;
             }
