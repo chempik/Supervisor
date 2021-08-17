@@ -15,5 +15,15 @@ namespace LibaryCore
         public int Id { get; internal set; }
         public long Memory { get; internal set; }
         public string Location { get; internal set; }
+
+        public ShortProcess() { }
+
+        public ShortProcess (string name, int id, long memory, string location)
+        {
+            Name = name;
+            Id = id;
+            Memory = memory;
+            Location = location;
+        }
     }
 }

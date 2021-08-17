@@ -18,9 +18,11 @@ namespace Watcher
             foreach (var i in list)
             {
                 var proces = shortProces.Where(x => x.Name == i.Name);
-                while (proces.Count() > i.Track)
+                var count = proces.Count();
+                while (count > i.Track)
                 {
                     _actionsProceses.KillOneProcess(i.Name);
+                    count--;
                 }
             }
         }
