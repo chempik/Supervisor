@@ -18,11 +18,11 @@ namespace UnitTest
             // arrange
             var config = new Config();
             string directoryName = @"C:\Target";
-            //var action = new FakeActionsProceses();
             config.Folder = directoryName;
 
             var newMockFileSystem = new MockFileSystem();
             newMockFileSystem.AddDirectory(@"C:\Target");
+
             newMockFileSystem.AddFile(@"C:\Target\msedge.xml", new MockFileData(
                 @"<?xml version=""1.0""?>
                 <ÑompositionProc xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
@@ -32,13 +32,17 @@ namespace UnitTest
                    <Autorun> true </Autorun >
                  </AuTorunProc>
                 </ÑompositionProc>"));
+
             var action = Substitute.For<IActionsProceses>();
-            action.Start(default).ReturnsForAnyArgs(x => new ShortProcess());
+
             var sut = new AutorunTrack(newMockFileSystem, action);
+
+            // act 
             sut.Traced(new List<ShortProcess>(), config);
-            
-            //act & assert 
-            Assert.Equal(new ShortProcess(), action.Start(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"));
+
+            //assert
+            action.Received(1).Start(@" C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe ");
+
         }
 
         [Fact]
@@ -60,12 +64,22 @@ namespace UnitTest
                    <Restart> true </Restart >
                  </AutorestartProc>
                 </ÑompositionProc>"));
+
             var action = Substitute.For<IActionsProceses>();
-            action.Start(default).ReturnsForAnyArgs(x => new ShortProcess());
+
             var sut = new AutorestartTrack(newMockFileSystem, action);
 
-            //act & assert 
-            Assert.Equal(new ShortProcess(), action.Start(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"));
+            var list = new List<ShortProcess>();
+
+            list.Add(new ShortProcess("msedge", 00, 00, @" C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe "));
+
+            //act
+            sut.Traced(list, config);
+            list.Clear();
+            sut.Traced(list, config);
+
+            //assert 
+            action.Received(1).Start(@" C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe ");
         }
 
         [Fact]
@@ -92,14 +106,16 @@ namespace UnitTest
             action.KillOneProcess(default).ReturnsForAnyArgs(x => true).AndDoes(x => proof = true);
             var sut = new NumerosityTrack(newMockFileSystem, action);
             var proc = new List<ShortProcess>();
-
-            //act 
             proc.Add(new ShortProcess ("msedge",00,00, @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"));
             proc.Add(new ShortProcess("msedge", 00, 00, @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"));
+            proc.Add(new ShortProcess("msedge", 00, 00, @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"));
+
+
+            //act 
             sut.Traced(proc, config);
 
             //assert 
-            Assert.True(proof);
+            action.Received(2).KillOneProcess("msedge");
         }
     }
 }
