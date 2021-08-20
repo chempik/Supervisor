@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uUApexS/HMXv6nOrLJJMaWunCqEyDLsQx4dWigJSQRHtZAmzCVA4VbEKHDkk2LA1oZgG2upteBpQzyd6Gb9y1Q==",
+  "dgSpecHash": "IgOjMUAzPr3QRgna0AM+Ebo5dQ7rsXbcNMXa1uxi5HjXGOsIFHXkLeWIOGzWgdaWHJzSmvhSBcnDR/6APDF3Bw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Viego\\Downloads\\Supervisor\\Supervisor\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
+  "projectFilePath": "C:\\Users\\Viego\\Downloads\\Supervisor (1)\\Supervisor\\Supervisor\\SupervisorConsole.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Viego\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\Viego\\.nuget\\packages\\consoleappframework\\3.3.0\\consoleappframework.3.3.0.nupkg.sha512",
