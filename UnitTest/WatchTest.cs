@@ -78,7 +78,8 @@ namespace UnitTest
         public void StartProcTest()
         {
             // arrange
-            bool open = false;
+            var check = new ShortProcess("opera", 4, 00, @" C:\Program Files (x86)\opera\Application\opera.exe ");
+            var open = new ShortProcess();
             var foo = Substitute.For<IDeserializeComposition>();
             foo.CheckProceses(@"C:\Target").Returns(
             x => new List<ShortProcess>
@@ -100,7 +101,7 @@ namespace UnitTest
 
             sut.Opened += delegate (object sender, ProcesesEventArgs e)
             {
-                open = true;
+                open = e.proc[0];
             };
 
             //act
@@ -108,21 +109,21 @@ namespace UnitTest
             sut.Start();
 
             //assert
-            Assert.True(open);
+            Assert.Equal(check, open);
         }
         
         [Fact]
         public void EndProcTest()
         {
             // arrange
-            bool end = false;
+            var check = new ShortProcess("msedge", 2, 00, @" C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe ");
+            var end = new ShortProcess();
             var foo = Substitute.For<IDeserializeComposition>();
             foo.CheckProceses(@"C:\Target").Returns(
             x => new List<ShortProcess>
             {
                 new ShortProcess("msedge", 1, 00, @" C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe "),
                 new ShortProcess("msedge", 2, 00, @" C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe "),
-                new ShortProcess("opera", 3, 00, @" C:\Program Files (x86)\opera\Application\opera.exe "),
             },
             x => new List<ShortProcess>
             {
@@ -134,7 +135,7 @@ namespace UnitTest
 
             sut.Ended += delegate (object sender, ProcesesEventArgs e)
             {
-                end = true;
+                end = e.proc[0]; ;
             };
 
             //act
@@ -142,7 +143,7 @@ namespace UnitTest
             sut.Start();
 
             //assert
-            Assert.True(end);
+            Assert.Equal(check, end);
         }
     }
 }
